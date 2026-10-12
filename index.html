@@ -81,6 +81,7 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
 <nav class="tabs" role="tablist" aria-label="Course">
   <div class="brand"><span>m</span>Predictor</div>
   <button role="tab" data-tab="dgnm" aria-selected="true">DGNM</button>
+  <button role="tab" data-tab="paramed" aria-selected="false">Paramedical<span class="soon">soon</span></button>
   <button role="tab" data-tab="mbbs" aria-selected="false">MBBS / BDS<span class="soon">soon</span></button>
 </nav>
 <main>
@@ -139,7 +140,7 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
 </div>
 
 <script>
-const TAGS = {dgnm:'DGNM', mbbs:'MBBS-BDS'};
+const TAGS = {dgnm:'DGNM', paramed:'PARAMED', mbbs:'MBBS-BDS'};
 const REPO = 'https://github.com/YCLAAcademy/mPredictor/issues/new';
 document.getElementById('fb').addEventListener('submit', e => {
   e.preventDefault();
@@ -149,7 +150,7 @@ document.getElementById('fb').addEventListener('submit', e => {
   const title = `[${tag}] ` + text.split('\n')[0].slice(0, 60);
   window.open(`${REPO}?title=${encodeURIComponent(title)}&body=${encodeURIComponent(text)}`, '_blank', 'noopener');
 });
-const NAMES = {mbbs:'MBBS / BDS'};
+const NAMES = {paramed:'Paramedical', mbbs:'MBBS / BDS'};
 document.querySelectorAll('nav.tabs button').forEach(b => b.addEventListener('click', () => {
   document.querySelectorAll('nav.tabs button').forEach(x => x.setAttribute('aria-selected', x === b));
   const t = b.dataset.tab;
