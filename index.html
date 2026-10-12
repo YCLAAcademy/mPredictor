@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>mPredictor</title>
-<meta name="description" content="TN Medical Counselling College Predictor for DGNM and MBBS / BDS.">
+<meta name="description" content="TN Medical Counselling College Predictor for DGNM, Paramedical and MBBS / BDS.">
 <style>
 :root{--bg:#f7f7f5;--card:#fff;--fg:#1d1d1b;--muted:#6b6b66;--line:#e3e2dd;--accent:#0b6e4f;
 --good:#1a7f37;--good-bg:#e6f4ea;--mid:#9a6700;--mid-bg:#fff4d6;--bad:#b42318;--bad-bg:#fdecea;--na:#6b6b66;--na-bg:#f0efeb}
@@ -71,6 +71,8 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
 .ctype{display:block;font-size:.78em;color:var(--muted)}
 .rl-cell{display:flex;align-items:center;gap:6px}.rl-cell .rl{flex:1}
 .rl-add{display:flex;flex-direction:column;gap:2px;font-size:.78rem;font-weight:600}.rl-add a{color:var(--muted)}
+.rl-btns.one{grid-template-columns:1fr}
+.clink{background:none;border:0;padding:0;color:var(--accent);font:inherit;font-weight:600;text-align:left;cursor:pointer;text-decoration:underline}
 .rl:hover{filter:brightness(.95);text-decoration:underline}
 </style>
 <script data-goatcounter="https://ycla.goatcounter.com/count"
@@ -85,7 +87,7 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
 <nav class="tabs" role="tablist" aria-label="Course">
   <div class="brand"><span>m</span>Predictor</div>
   <button role="tab" data-tab="dgnm" aria-selected="true">DGNM</button>
-  <button role="tab" data-tab="paramed" aria-selected="false">Paramedical<span class="soon">soon</span></button>
+  <button role="tab" data-tab="paramed" aria-selected="false">Paramedical</button>
   <button role="tab" data-tab="mbbs" aria-selected="false">MBBS / BDS</button>
 </nav>
 <main>
@@ -170,9 +172,44 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
 </ul>
 </div>
 </section>
-<section id="tab-soon" hidden>
-<h1 id="soon-title"></h1>
-<div class="card"><p class="verdict">Coming soon</p><p class="facts">Seat-chance prediction for this course is being prepared. DGNM is available now.</p></div>
+<section id="tab-paramed" hidden>
+<h1>Paramedical</h1>
+<p class="sub">B.Sc. Nursing, B.Pharm, B.P.T and allied health degree courses, Tamil Nadu. Find your chance for a <b>government college</b> seat, in which <b>course</b> and which <b>round</b>. Based on 2025 counselling results, with 2026 Round 1 and 2 results shown.</p>
+
+<div class="card">
+<h2>Enter your details</h2>
+<form id="pf">
+  <label>Community
+    <select id="p-comm"><option>OC</option><option>BC</option><option>BCM</option><option value="MBC&amp;DNC" selected>MBC/DNC</option><option>SC</option><option>SCA</option><option>ST</option></select></label>
+  <label><span id="p-rank-l">Community rank</span>
+    <input id="p-rank" type="number" min="1" inputmode="numeric" placeholder="e.g. 1500" value="1500" required></label>
+  <label>Course
+    <select id="p-course"><option value="">All courses</option></select></label>
+  <button type="submit">Check</button>
+</form>
+<p class="note" id="p-help" style="margin:10px 0 0"></p>
+<div class="rl-box">
+  <div class="rl-title">📄 Find your rank:</div>
+  <div class="rl-btns one">
+    <div class="rl-cell"><a class="rl sci" href="https://tnmedicalselection.net/news/12082026004127.pdf" target="_blank" rel="noopener">RANK LIST</a><span class="rl-add"><a href="https://tnmedicalselection.net/news/28082026025044.pdf" target="_blank" rel="noopener">A1</a><a href="https://tnmedicalselection.net/news/01092026063742.pdf" target="_blank" rel="noopener">A2</a><a href="https://tnmedicalselection.net/news/11092026041446.pdf" target="_blank" rel="noopener">A3</a></span></div>
+  </div>
+</div>
+</div>
+
+<div id="p-out"></div>
+
+<div class="card note">
+<b>How it works</b>
+<ul>
+<li><b>Yes</b> = good chance. <b>Maybe</b> = small chance. <b>No</b> = not likely.</li>
+<li>We use 2025 counselling data: the last rank that got a seat, for your community, in each course, college and round.</li>
+<li>If a college has more (or fewer) seats in 2026, we raise (or lower) the 2025 last rank a little.</li>
+<li>Some courses have new names in 2026 (for example B.Sc. Radiography is now B.MRIT). We match them to the 2025 course.</li>
+<li>The <b>2026 last rank</b> column shows the real 2026 result so far (up to Round 2).</li>
+<li>Only government and ESIC college seats. PwD and Ex-servicemen seats and self-financing colleges are not included.</li>
+<li>This is only a prediction. It is not official. Real results can change.</li>
+</ul>
+</div>
 </section>
 <div class="card feedback" id="feedback">
 <b>Feedback</b>
@@ -196,15 +233,14 @@ document.getElementById('fb').addEventListener('submit', e => {
   const title = `[${tag}] ` + text.split('\n')[0].slice(0, 60);
   window.open(`${REPO}?title=${encodeURIComponent(title)}&body=${encodeURIComponent(text)}`, '_blank', 'noopener');
 });
-const NAMES = {paramed:'Paramedical', mbbs:'MBBS / BDS'};
 document.querySelectorAll('nav.tabs button').forEach(b => b.addEventListener('click', () => {
   document.querySelectorAll('nav.tabs button').forEach(x => x.setAttribute('aria-selected', x === b));
   const t = b.dataset.tab;
   document.getElementById('tab-dgnm').hidden = t !== 'dgnm';
   document.getElementById('tab-mbbs').hidden = t !== 'mbbs';
-  document.getElementById('tab-soon').hidden = t !== 'paramed';
+  document.getElementById('tab-paramed').hidden = t !== 'paramed';
   document.getElementById('fb-tab').textContent = TAGS[t];
-  if (t === 'paramed') document.getElementById('soon-title').textContent = NAMES[t];
+  if (t === 'paramed') loadParamed();
   if (t === 'mbbs') loadMbbs();
 }));
 let DATA;
@@ -401,6 +437,142 @@ document.getElementById('mf').addEventListener('submit', e => {
       <colgroup><col style="width:34%"><col style="width:12%"><col style="width:12%"><col style="width:12%"><col style="width:15%"><col style="width:15%"></colgroup>
       <thead><tr><th>College</th>${[1,2,3].map(n => `<th><span class="hide-sm">Round </span><span class="show-sm">R</span>${n}</th>`).join('')}<th>2025 last rank</th><th>2026 last rank</th></tr></thead>
       <tbody>${tr}</tbody></table></div>`;
+});
+</script>
+<script>
+// Paramedical tab. Data loads on first open of the tab.
+let PDATA, pExample = true;
+function loadParamed(){
+  if (PDATA) return;
+  PDATA = 'loading';
+  fetch('data/paramed.json').then(r => r.json()).then(d => {
+    PDATA = d;
+    const sel = document.getElementById('p-course');
+    for (const [k, c] of Object.entries(d.courses)) sel.add(new Option(c.name, k));
+    document.getElementById('pf').requestSubmit();
+  }).catch(() => {
+    PDATA = null;
+    document.getElementById('p-out').innerHTML = '<div class="card">Could not load data.</div>';
+  });
+}
+function pForm(){
+  const oc = document.getElementById('p-comm').value === 'OC';
+  document.getElementById('p-rank-l').textContent = oc ? 'Overall rank' : 'Community rank';
+  document.getElementById('p-help').innerHTML = oc
+    ? 'Find your name in the rank list. OC has no community rank, so enter your overall <b>RANK</b>.'
+    : 'Find your name in the rank list. Enter your <b>COMMUNITY RANK</b> (last column). Do not enter the overall RANK.';
+}
+document.getElementById('p-comm').addEventListener('change', pForm);
+pForm();
+
+// One course: a row per college. Same method as the other tabs.
+function pPredict(course, comm, rank){
+  const c = PDATA.courses[course], hist = c.communities[comm];
+  const t25 = sum(c.seats2025), t26 = sum(c.seats2026);
+  const gRatio = t25 && t26 ? t26 / t25 : 1;
+  const keys = new Set([...Object.keys(c.seats2026), ...Object.keys(hist)]);
+  const rows = [];
+  let cut25 = null, cut26 = null;
+  for (const k of keys) {
+    const s25 = c.seats2025[k] || 0, s26 = c.seats2026[k] || 0;
+    if (s25 && !s26) continue;                    // no seats in this course in 2026
+    const h = hist[k] || {}, h25 = h['2025'] || {}, h26 = h['2026'] || {};
+    const ratio = s25 && s26 ? s26 / s25 : gRatio;
+    let cum = 0, last = null;
+    const r = [1,2,3].map(n => {
+      if (h25[n]) { cum = Math.max(cum, h25[n].last); last = cum; }
+      if (!cum) return 'No';
+      const proj = cum * ratio;
+      return rank <= proj * 0.9 ? 'Yes' : rank <= proj * 1.1 ? 'Maybe' : 'No';
+    });
+    const last26 = Math.max(0, ...Object.values(h26).map(x => x.last)) || null;
+    if (last) cut25 = Math.max(cut25 || 0, last);
+    if (last26) cut26 = Math.max(cut26 || 0, last26);
+    const yes = r.indexOf('Yes'), maybe = r.indexOf('Maybe');
+    const best = yes >= 0 ? {round: yes+1, s:'Yes'} : maybe >= 0 ? {round: maybe+1, s:'Maybe'} : null;
+    rows.push({k, r, last, last26, best, proj: last ? Math.round(last * ratio) : null, hasData: !!last});
+  }
+  const key = x => x.best ? (x.best.s === 'Yes' ? 0 : 3) + x.best.round : 9;
+  rows.sort((a,b) => key(a)-key(b) || (a.proj||1e9)-(b.proj||1e9) || (a.last26||1e9)-(b.last26||1e9));
+  return {rows, cut25, cut26};
+}
+// All courses: a row per course, best chance in any of its colleges.
+const RANKS = {Yes:0, Maybe:1, No:2};
+function pAll(comm, rank){
+  const rows = Object.keys(PDATA.courses).map(k => {
+    const p = pPredict(k, comm, rank);
+    const r = [0,1,2].map(i => p.rows.reduce((b, x) => RANKS[x.r[i]] < RANKS[b] ? x.r[i] : b, 'No'));
+    const yes = r.indexOf('Yes'), maybe = r.indexOf('Maybe');
+    const best = yes >= 0 ? {round: yes+1, s:'Yes'} : maybe >= 0 ? {round: maybe+1, s:'Maybe'} : null;
+    return {k, r, best, last: p.cut25, last26: p.cut26, hasData: !!p.cut25,
+            n: [0,1,2].map(i => p.rows.filter(x => x.r[i] === 'Yes').length)};
+  });
+  const key = x => x.best ? (x.best.s === 'Yes' ? 0 : 3) + x.best.round : 9;
+  rows.sort((a,b) => key(a)-key(b) || (a.last||1e9)-(b.last||1e9));
+  return rows;
+}
+function pShow(course){
+  document.getElementById('p-course').value = course;
+  document.getElementById('pf').requestSubmit();
+  document.getElementById('p-out').scrollIntoView({behavior:'smooth'});
+}
+
+document.getElementById('pf').addEventListener('submit', e => {
+  e.preventDefault();
+  if (!PDATA || PDATA === 'loading') return;
+  const comm = document.getElementById('p-comm').value;
+  const course = document.getElementById('p-course').value;
+  const rank = parseInt(document.getElementById('p-rank').value, 10);
+  if (!(rank > 0)) return;
+  const commLbl = comm.replace('&', '/');
+  const rankLbl = comm === 'OC' ? 'overall rank' : `${commLbl} community rank`;
+  const tag = s => `<span class="tag ${CLS[s]}">${s}</span>`;
+  const rTh = [1,2,3].map(n => `<th><span class="hide-sm">Round </span><span class="show-sm">R</span>${n}</th>`).join('');
+  const cells = x => (x.hasData ? x.r.map(s => `<td>${tag(s)}</td>`).join('') : '<td colspan="3"><span class="tag NoData">No 2025 data</span></td>')
+    + `<td class="n">${x.last ? fmtR(x.last) : '–'}</td><td class="n">${x.last26 ? fmtR(x.last26) : '–'}</td>`;
+  let rows, what, table;
+  if (course) {
+    const p = pPredict(course, comm, rank);
+    rows = p.rows; what = PDATA.courses[course].name;
+    table = `<h2>Prediction · ${esc(what)}</h2><table class="pred">
+      <colgroup><col style="width:34%"><col style="width:12%"><col style="width:12%"><col style="width:12%"><col style="width:15%"><col style="width:15%"></colgroup>
+      <thead><tr><th>College</th>${rTh}<th>2025 last rank</th><th>2026 last rank</th></tr></thead>
+      <tbody>${rows.map(x => `<tr><td>${esc(PDATA.colleges[x.k] || x.k)}</td>${cells(x)}</tr>`).join('')}</tbody></table>
+      <p class="note" style="margin:10px 0 0"><button type="button" class="clink" onclick="pShow('')">← All courses</button></p>`;
+    var cut25 = p.cut25, cut26 = p.cut26;
+  } else {
+    rows = pAll(comm, rank); what = 'any course';
+    table = `<h2>Prediction · All courses</h2><p class="note" style="margin:0 0 8px">Best chance in any government college of that course. Tap a course to see each college.</p><table class="pred">
+      <colgroup><col style="width:34%"><col style="width:12%"><col style="width:12%"><col style="width:12%"><col style="width:15%"><col style="width:15%"></colgroup>
+      <thead><tr><th>Course</th>${rTh}<th>2025 last rank</th><th>2026 last rank</th></tr></thead>
+      <tbody>${rows.map(x => `<tr><td><button type="button" class="clink" onclick="pShow('${x.k}')">${esc(PDATA.courses[x.k].name)}</button></td>${cells(x)}</tr>`).join('')}</tbody></table>`;
+  }
+  const unit = course ? plural : n => n === 1 ? '1 course' : n + ' courses';
+  const y = [0,1,2].map(i => rows.filter(x => x.r[i] === 'Yes').length);
+  const m = [0,1,2].map(i => rows.filter(x => x.r[i] === 'Maybe').length);
+  const any = rows.some(x => x.hasData);
+
+  let verdict, cls;
+  if (!any) { verdict = `No data. In 2025, no ${commLbl} student got a government seat in ${esc(what)}.`; cls = 'NoData'; }
+  else if (y[0]) { verdict = 'Good chance in <b>Round 1</b>.'; cls = 'Likely'; }
+  else if (y[1]) { verdict = 'Not likely in Round 1. Good chance in <b>Round 2</b>.'; cls = 'Likely'; }
+  else if (y[2]) { verdict = 'Not likely in Round 1 or Round 2. Chance in <b>Round 3</b>.'; cls = 'Borderline'; }
+  else if (m.some(Boolean)) { verdict = `Small chance only, in <b>Round ${m.findIndex(Boolean)+1}</b> or later. Also apply to private colleges.`; cls = 'Borderline'; }
+  else { verdict = `Government seat is <b>not likely</b>${course ? ' in this course. Check <button type="button" class="clink" onclick="pShow(\'\')">all courses</button>' : ''}. Please also apply to private (self-financing) colleges.`; cls = 'Unlikely'; }
+  const label = {Likely:'Yes', Borderline:'Maybe', Unlikely:'No', NoData:'No data'}[cls];
+
+  const roundLines = any ? '<ul class="rounds">' + [1,2,3].map(n =>
+    `<li><b>Round ${n}:</b> ${y[n-1] ? `Yes in ${unit(y[n-1])}` : 'No'}${m[n-1] ? ` · Maybe in ${unit(m[n-1])}` : ''}</li>`).join('') + '</ul>' : '';
+  const facts = course && cut25 ? `Your ${rankLbl}: <b>${fmtR(rank)}</b>. In 2025, the last ${commLbl} student to get a ${esc(what)} seat had rank <b>${fmtR(cut25)}</b>.`
+    + (cut26 ? ` In 2026 (up to Round 2) it was <b>${fmtR(cut26)}</b>.` : '')
+    : any ? `Your ${rankLbl}: <b>${fmtR(rank)}</b>.` : '';
+
+  const hint = pExample ? `<div class="card hint"><b>Example:</b> MBC/DNC, community rank 1,500, all courses. <b>Change these to your details</b> above and press <b>Check</b>.</div>` : '';
+  pExample = false;
+  document.getElementById('p-out').innerHTML = hint + `
+    <div class="card"><p class="verdict"><span class="tag ${cls}" style="font-size:1rem">${label}</span> ${verdict}</p>${roundLines}<p class="facts">${facts}</p></div>
+    <div class="caution" role="note">⚠️ <b>Please note:</b> This is only a prediction. It is not official. Real results can change.</div>
+    <div class="card scroll">${table}</div>`;
 });
 </script>
 </body>
