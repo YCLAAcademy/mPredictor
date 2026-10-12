@@ -50,6 +50,10 @@ header.site{max-width:1080px;margin:0 auto;padding:20px 16px 0}
 .brand{display:none}
 .hint{border-color:var(--accent);background:var(--mid-bg)}
 .rounds{margin:6px 0 8px;padding-left:20px}
+.banner{display:block;margin:0 0 16px}.banner img{width:100%;height:auto;border-radius:12px;display:block}
+.feedback form{display:flex;flex-direction:column;gap:8px}
+textarea{font:inherit;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);resize:vertical}
+.feedback button{align-self:flex-start}
 </style>
 </head>
 <body>
@@ -67,6 +71,7 @@ header.site{max-width:1080px;margin:0 auto;padding:20px 16px 0}
 </nav>
 <main>
 <section id="tab-dgnm">
+<a href="#f" class="banner" aria-label="Go to the predictor form"><img src="image/dgnm.jpg" width="1600" height="893" alt="TN Medical Counselling College Predictor – which nursing college can I get?"></a>
 <h1><span>m</span>Predictor · DGNM</h1>
 <p class="sub">DGNM (Nursing Diploma), Tamil Nadu. Find your chance for a <b>government college</b> seat, and in which <b>round</b>. Based on 2025 counselling results.</p>
 
@@ -88,12 +93,10 @@ header.site{max-width:1080px;margin:0 auto;padding:20px 16px 0}
 <div class="card note">
 <b>How it works</b>
 <ul>
-<li>We look at the <b>last rank that got a seat</b> in 2025, for your community, in each college and each round.</li>
+<li><b>Yes</b> = good chance. <b>Maybe</b> = small chance. <b>No</b> = not likely.</li>
+<li>We use past counselling data (2025): the last rank that got a seat, for your community, in each college and round.</li>
 <li>2026 has more government seats. So we increase the 2025 last rank a little, to guess the 2026 last rank.</li>
-<li><b>Yes</b> = good chance. <b>Maybe</b> = close, small chance. <b>No</b> = not likely.</li>
-<li>Not included: special quotas (Ex-servicemen, Sports, PWD, IRT Ward) and private (self-financing) colleges.</li>
-<li>This is only a guess from last year. It is not official. Real results can change.</li>
-<li>No student names or application numbers are used on this site.</li>
+<li>This is only a prediction. It is not official. Real results can change.</li>
 </ul>
 </div>
 </section>
@@ -101,16 +104,35 @@ header.site{max-width:1080px;margin:0 auto;padding:20px 16px 0}
 <h1 id="soon-title"></h1>
 <div class="card"><p class="verdict">Coming soon</p><p class="facts">Seat-chance prediction for this course is being prepared. DGNM is available now.</p></div>
 </section>
+<div class="card feedback" id="feedback">
+<b>Feedback</b>
+<p class="note" style="margin:4px 0 10px">Found a mistake or have an idea? Tell us. (Opens GitHub. A free GitHub account is needed.)</p>
+<form id="fb">
+  <textarea id="fb-text" rows="3" placeholder="Write your feedback here…" required></textarea>
+  <button type="submit">Send feedback (<span id="fb-tab">DGNM</span>)</button>
+</form>
+</div>
 </main>
 </div>
 
 <script>
+const TAGS = {dgnm:'DGNM', paramed:'PARAMED', dpharm:'DPHARM', mbbs:'MBBS-BDS'};
+const REPO = 'https://github.com/YCLAAcademy/mPredictor/issues/new';
+document.getElementById('fb').addEventListener('submit', e => {
+  e.preventDefault();
+  const text = document.getElementById('fb-text').value.trim();
+  if (!text) return;
+  const tag = document.getElementById('fb-tab').textContent;
+  const title = `[${tag}] ` + text.split('\n')[0].slice(0, 60);
+  window.open(`${REPO}?title=${encodeURIComponent(title)}&body=${encodeURIComponent(text)}`, '_blank', 'noopener');
+});
 const NAMES = {paramed:'Paramedical', dpharm:'D.Pharm', mbbs:'MBBS / BDS'};
 document.querySelectorAll('nav.tabs button').forEach(b => b.addEventListener('click', () => {
   document.querySelectorAll('nav.tabs button').forEach(x => x.setAttribute('aria-selected', x === b));
   const t = b.dataset.tab;
   document.getElementById('tab-dgnm').hidden = t !== 'dgnm';
   document.getElementById('tab-soon').hidden = t === 'dgnm';
+  document.getElementById('fb-tab').textContent = TAGS[t];
   if (t !== 'dgnm') document.getElementById('soon-title').innerHTML = '<span>m</span>Predictor · ' + NAMES[t];
 }));
 let DATA;
