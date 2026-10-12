@@ -64,7 +64,10 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
 .rl-title{font-size:1.15em;font-weight:700;margin-bottom:8px}
 .rl-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .rl{text-align:center;padding:.7em .4em;border:2px solid var(--accent);border-radius:8px;color:var(--accent);font-weight:700;text-decoration:none;font-size:clamp(.75rem,3vw,.95rem)}
-.rl:hover{background:var(--accent);color:#fff}
+.rl.sci{--c:#2f6fb3;--cb:#e8f1fb}.rl.voc{--c:#7a4fb0;--cb:#f1ebfa}.rl.oth{--c:#c26a1b;--cb:#fdf0e3}
+@media (prefers-color-scheme:dark){.rl.sci{--c:#8cb8ea;--cb:#1b2a3b}.rl.voc{--c:#c3a6ea;--cb:#2a2138}.rl.oth{--c:#f0b27a;--cb:#3a2a1a}}
+.rl.sci,.rl.voc,.rl.oth{color:var(--c);border-color:var(--c);background:var(--cb)}
+.rl:hover{filter:brightness(.95);text-decoration:underline}
 </style>
 </head>
 <body>
@@ -100,9 +103,9 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
 <div class="rl-box">
   <div class="rl-title">📄 Official Rank List</div>
   <div class="rl-btns">
-    <a class="rl" href="https://tnmedicalselection.net/news/12082026004204.pdf" target="_blank" rel="noopener">SCIENCE</a>
-    <a class="rl" href="https://tnmedicalselection.net/news/12082026004238.pdf" target="_blank" rel="noopener">VOCATIONAL</a>
-    <a class="rl" href="https://tnmedicalselection.net/news/12082026004300.pdf" target="_blank" rel="noopener">OTHERS</a>
+    <a class="rl sci" href="https://tnmedicalselection.net/news/12082026004204.pdf" target="_blank" rel="noopener">SCIENCE</a>
+    <a class="rl voc" href="https://tnmedicalselection.net/news/12082026004238.pdf" target="_blank" rel="noopener">VOCATIONAL</a>
+    <a class="rl oth" href="https://tnmedicalselection.net/news/12082026004300.pdf" target="_blank" rel="noopener">OTHERS</a>
   </div>
 </div>
 </div>
