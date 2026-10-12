@@ -60,7 +60,11 @@ table.pred{table-layout:fixed;font-size:clamp(.72rem,2.6vw,.92rem)}
 table.pred th,table.pred td{padding:.5em .3em;overflow-wrap:anywhere}
 table.pred th:not(:first-child),table.pred td:not(:first-child){text-align:center}
 table.pred .tag{padding:.15em .5em;font-size:.85em}
-.rl{display:inline-block;margin-top:10px;padding:8px 12px;border:1px solid var(--accent);border-radius:8px;color:var(--accent);font-weight:600;text-decoration:none}
+.rl-box{margin-top:14px}
+.rl-title{font-size:1.15em;font-weight:700;margin-bottom:8px}
+.rl-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.rl{text-align:center;padding:.7em .4em;border:2px solid var(--accent);border-radius:8px;color:var(--accent);font-weight:700;text-decoration:none;font-size:clamp(.75rem,3vw,.95rem)}
+.rl:hover{background:var(--accent);color:#fff}
 </style>
 </head>
 <body>
@@ -93,7 +97,14 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
   <button type="submit">Check</button>
 </form>
 <p class="note" style="margin:10px 0 0">Find your name in the rank list. Enter your <b>COMMUNITY RANK</b> (last column). Do not enter the overall RANK.</p>
-<a id="rl" class="rl" href="https://tnmedicalselection.net/news/12082026004204.pdf" target="_blank" rel="noopener">📄 Rank list – <span id="rl-g">Science</span> (official)</a>
+<div class="rl-box">
+  <div class="rl-title">📄 Official Rank List</div>
+  <div class="rl-btns">
+    <a class="rl" href="https://tnmedicalselection.net/news/12082026004204.pdf" target="_blank" rel="noopener">SCIENCE</a>
+    <a class="rl" href="https://tnmedicalselection.net/news/12082026004238.pdf" target="_blank" rel="noopener">VOCATIONAL</a>
+    <a class="rl" href="https://tnmedicalselection.net/news/12082026004300.pdf" target="_blank" rel="noopener">OTHERS</a>
+  </div>
+</div>
 </div>
 
 <div id="out"></div>
@@ -124,15 +135,6 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
 </div>
 
 <script>
-const RANKLIST = {
-  Science: 'https://tnmedicalselection.net/news/12082026004204.pdf',
-  Vocational: 'https://tnmedicalselection.net/news/12082026004238.pdf',
-  Others: 'https://tnmedicalselection.net/news/12082026004300.pdf',
-};
-document.getElementById('group').addEventListener('change', e => {
-  document.getElementById('rl').href = RANKLIST[e.target.value];
-  document.getElementById('rl-g').textContent = e.target.value;
-});
 const TAGS = {dgnm:'DGNM', paramed:'PARAMED', dpharm:'DPHARM', mbbs:'MBBS-BDS'};
 const REPO = 'https://github.com/YCLAAcademy/mPredictor/issues/new';
 document.getElementById('fb').addEventListener('submit', e => {
