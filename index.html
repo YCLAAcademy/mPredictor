@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>mPredictor – DGNM Seat Chances</title>
+<title>mPredictor</title>
 <meta name="description" content="Estimate your chance of a Tamil Nadu government DGNM (Diploma in Nursing) seat from your community rank, based on 2025 counselling results.">
 <style>
 :root{--bg:#f7f7f5;--card:#fff;--fg:#1d1d1b;--muted:#6b6b66;--line:#e3e2dd;--accent:#0b6e4f;
@@ -33,11 +33,31 @@ td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .note{font-size:.85rem;color:var(--muted)}
 .note li{margin-bottom:4px}
 @media (max-width:560px){.hide-sm{display:none}}
+.layout{display:flex;gap:20px;max-width:1080px;margin:0 auto;padding:24px 16px 48px}
+nav.tabs{flex:0 0 180px;display:flex;flex-direction:column;gap:6px;position:sticky;top:16px;align-self:flex-start}
+nav.tabs button{background:transparent;color:var(--fg);border:1px solid transparent;text-align:left;font-weight:500;padding:10px 12px}
+nav.tabs button[aria-selected=true]{background:var(--card);border-color:var(--line);color:var(--accent);font-weight:700}
+nav.tabs button .soon{font-size:.7rem;color:var(--muted);font-weight:400;margin-left:4px}
+.brand{font-size:1.4rem;font-weight:700;margin:0 0 12px 12px}.brand span{color:var(--accent)}
+main{flex:1;min-width:0;max-width:none;margin:0;padding:0}
+[hidden]{display:none!important}
+@media (max-width:720px){.layout{flex-direction:column;gap:12px}
+ nav.tabs{position:static;flex-direction:row;overflow-x:auto;flex-basis:auto}
+ nav.tabs button{white-space:nowrap}.brand{display:none}}
 </style>
 </head>
 <body>
+<div class="layout">
+<nav class="tabs" role="tablist" aria-label="Course">
+  <div class="brand"><span>m</span>Predictor</div>
+  <button role="tab" data-tab="dgnm" aria-selected="true">DGNM</button>
+  <button role="tab" data-tab="paramed" aria-selected="false">Paramedical<span class="soon">soon</span></button>
+  <button role="tab" data-tab="dpharm" aria-selected="false">D.Pharm<span class="soon">soon</span></button>
+  <button role="tab" data-tab="mbbs" aria-selected="false">MBBS / BDS<span class="soon">soon</span></button>
+</nav>
 <main>
-<h1><span>m</span>Predictor</h1>
+<section id="tab-dgnm">
+<h1><span>m</span>Predictor · DGNM</h1>
 <p class="sub">Tamil Nadu DGNM (Diploma in General Nursing &amp; Midwifery): your chance of a <b>government college</b> seat, based on 2025 counselling results.</p>
 
 <div class="card">
@@ -65,9 +85,23 @@ td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 <li>No candidate names or application numbers are used or stored on this site. Only seat counts and cutoff ranks.</li>
 </ul>
 </div>
+</section>
+<section id="tab-soon" hidden>
+<h1 id="soon-title"></h1>
+<div class="card"><p class="verdict">Coming soon</p><p class="facts">Seat-chance prediction for this course is being prepared. DGNM is available now.</p></div>
+</section>
 </main>
+</div>
 
 <script>
+const NAMES = {paramed:'Paramedical', dpharm:'D.Pharm', mbbs:'MBBS / BDS'};
+document.querySelectorAll('nav.tabs button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('nav.tabs button').forEach(x => x.setAttribute('aria-selected', x === b));
+  const t = b.dataset.tab;
+  document.getElementById('tab-dgnm').hidden = t !== 'dgnm';
+  document.getElementById('tab-soon').hidden = t === 'dgnm';
+  if (t !== 'dgnm') document.getElementById('soon-title').innerHTML = '<span>m</span>Predictor · ' + NAMES[t];
+}));
 let DATA;
 const fmtR = n => n.toLocaleString('en-IN');
 fetch('data/dgnm.json').then(r => r.json()).then(d => { DATA = d; }).catch(() => {
