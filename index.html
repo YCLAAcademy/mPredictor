@@ -49,6 +49,7 @@ header.site{max-width:1080px;margin:0 auto;padding:20px 16px 0}
 .site-desc{margin:4px 0 0;color:var(--muted)}
 .brand{display:none}
 .hint{border-color:var(--accent);background:var(--mid-bg)}
+.rounds{margin:6px 0 8px;padding-left:20px}
 </style>
 </head>
 <body>
@@ -67,7 +68,7 @@ header.site{max-width:1080px;margin:0 auto;padding:20px 16px 0}
 <main>
 <section id="tab-dgnm">
 <h1><span>m</span>Predictor · DGNM</h1>
-<p class="sub">Tamil Nadu DGNM (Diploma in General Nursing &amp; Midwifery): your chance of a <b>government college</b> seat, based on 2025 counselling results.</p>
+<p class="sub">DGNM (Nursing Diploma), Tamil Nadu. Find your chance for a <b>government college</b> seat, and in which <b>round</b>. Based on 2025 counselling results.</p>
 
 <div class="card">
 <form id="f">
@@ -79,19 +80,20 @@ header.site{max-width:1080px;margin:0 auto;padding:20px 16px 0}
     <input id="rank" type="number" min="1" inputmode="numeric" placeholder="e.g. 200" value="200" required></label>
   <button type="submit">Check</button>
 </form>
+<p class="note" style="margin:10px 0 0">Enter your <b>COMMUNITY RANK</b> (last column in the rank list). Do not enter the overall RANK.</p>
 </div>
 
 <div id="out"></div>
 
 <div class="card note">
-<b>How this works</b>
+<b>How it works</b>
 <ul>
-<li>For each college, it finds the <b>last community rank allotted</b> to your community in 2025 (all 3 rounds, regular seats only).</li>
-<li>2026 has more government seats, so that cutoff is scaled by the college's 2026 ÷ 2025 seat ratio to give a <b>projected 2026 cutoff</b>.</li>
-<li><b>Likely</b>: your rank is within 90% of the projected cutoff. <b>Borderline</b>: within ±10%. <b>Unlikely</b>: beyond that.</li>
-<li>Special quotas (Ex-servicemen, Sports, PWD, IRT Ward) and self-financing colleges are not included.</li>
-<li>This is an estimate from one year of data, not an official prediction. Actual cutoffs depend on applicants, choices and drop-outs.</li>
-<li>No candidate names or application numbers are used or stored on this site. Only seat counts and cutoff ranks.</li>
+<li>We look at the <b>last rank that got a seat</b> in 2025, for your community, in each college and each round.</li>
+<li>2026 has more government seats. So we increase the 2025 last rank a little, to guess the 2026 last rank.</li>
+<li><b>Yes</b> = good chance. <b>Maybe</b> = close, small chance. <b>No</b> = not likely.</li>
+<li>Not included: special quotas (Ex-servicemen, Sports, PWD, IRT Ward) and private (self-financing) colleges.</li>
+<li>This is only a guess from last year. It is not official. Real results can change.</li>
+<li>No student names or application numbers are used on this site.</li>
 </ul>
 </div>
 </section>
@@ -127,27 +129,33 @@ function predict(group, comm, rank){
   const gRatio = tot25 ? tot26 / tot25 : 1;
   const keys = new Set([...Object.keys(g.seats2026), ...Object.keys(c.colleges)]);
   const rows = [];
+  let cut25 = null;
   for (const k of keys) {
-    const hist = c.colleges[k];
+    const hist = c.colleges[k] || {};
     const s25 = sum(g.seats2025[k]), s26 = sum(g.seats2026[k]);
     const ratio = (s25 && s26) ? s26 / s25 : gRatio;
-    if (!hist) { rows.push({k, status:'NoData', s26}); continue; }
-    const rounds = Object.entries(hist);
-    const last = Math.max(...rounds.map(([,v]) => v.last));
-    const n = rounds.reduce((a,[,v]) => a + v.n, 0);
-    const lastRound = rounds.find(([,v]) => v.last === last)[0];
-    const proj = Math.round(last * ratio);
-    const status = rank <= proj * 0.9 ? 'Likely' : rank <= proj * 1.1 ? 'Borderline' : 'Unlikely';
-    rows.push({k, status, last, lastRound, proj, n, s26});
+    // cumulative last rank up to each round, then each round's chance
+    let cum = 0, best = null, last = null;
+    const r = [1,2,3].map(n => {
+      if (hist[n]) { cum = Math.max(cum, hist[n].last); last = cum; }
+      if (!cum) return 'No';
+      const proj = cum * ratio;
+      const s = rank <= proj * 0.9 ? 'Yes' : rank <= proj * 1.1 ? 'Maybe' : 'No';
+      return s;
+    });
+    if (last) cut25 = Math.max(cut25 || 0, last);
+    const yes = r.indexOf('Yes'), maybe = r.indexOf('Maybe');
+    best = yes >= 0 ? {round: yes+1, s:'Yes'} : maybe >= 0 ? {round: maybe+1, s:'Maybe'} : null;
+    rows.push({k, r, last, best, proj: last ? Math.round(last * ratio) : null, hasData: !!last});
   }
-  const order = {Likely:0, Borderline:1, Unlikely:2, NoData:3};
-  rows.sort((a,b) => order[a.status]-order[b.status] || (b.proj||0)-(a.proj||0));
-  const withData = rows.filter(r => r.last);
-  const cut25 = withData.length ? Math.max(...withData.map(r => r.last)) : null;
-  return {rows, cut25, proj26: cut25 ? Math.round(cut25 * gRatio) : null, gRatio, c};
+  const key = x => x.best ? (x.best.s === 'Yes' ? 0 : 3) + x.best.round : 9;
+  rows.sort((a,b) => key(a)-key(b) || (b.proj||0)-(a.proj||0));
+  return {rows, cut25, proj26: cut25 ? Math.round(cut25 * gRatio) : null};
 }
 
 function esc(s){ return String(s).replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch])); }
+const CLS = {Yes:'Likely', Maybe:'Borderline', No:'Unlikely'};
+const plural = n => n === 1 ? '1 college' : n + ' colleges';
 
 document.getElementById('f').addEventListener('submit', e => {
   e.preventDefault();
@@ -157,32 +165,36 @@ document.getElementById('f').addEventListener('submit', e => {
   const rank = parseInt(document.getElementById('rank').value, 10);
   if (!(rank > 0)) return;
   const p = predict(group, comm, rank);
-  const likely = p.rows.filter(r => r.status === 'Likely').length;
-  const border = p.rows.filter(r => r.status === 'Borderline').length;
   const commLbl = comm.replace('&', '/');
+  const yesIn = n => p.rows.filter(x => x.r[n-1] === 'Yes').length;
+  const maybeIn = n => p.rows.filter(x => x.r[n-1] === 'Maybe').length;
+  const y = [1,2,3].map(yesIn), m = [1,2,3].map(maybeIn);
+
   let verdict, cls;
-  if (!p.cut25) { verdict = `No 2025 ${commLbl} allotments found for the ${group} group.`; cls='NoData'; }
-  else if (likely) { verdict = `Good chance: likely at ${likely} college${likely>1?'s':''}` + (border ? `, borderline at ${border} more.` : '.'); cls='Likely'; }
-  else if (border) { verdict = `Borderline: possible at ${border} college${border>1?'s':''}, most likely in a later round.`; cls='Borderline'; }
-  else { verdict = 'Unlikely for a government seat. Consider self-financing colleges as a backup.'; cls='Unlikely'; }
+  if (!p.cut25) { verdict = `No data. In 2025, no ${commLbl} student got a regular seat in the ${group} group.`; cls = 'NoData'; }
+  else if (y[0]) { verdict = 'Good chance in <b>Round 1</b>.'; cls = 'Likely'; }
+  else if (y[1]) { verdict = 'Not likely in Round 1. Good chance in <b>Round 2</b>.'; cls = 'Likely'; }
+  else if (y[2]) { verdict = 'Not likely in Round 1 or Round 2. Chance in <b>Round 3</b>.'; cls = 'Borderline'; }
+  else if (m.some(Boolean)) { verdict = `Small chance only, in <b>Round ${m.findIndex(Boolean)+1}</b> or later. Also apply to private colleges.`; cls = 'Borderline'; }
+  else { verdict = 'Government seat is <b>not likely</b>. Please also apply to private (self-financing) colleges.'; cls = 'Unlikely'; }
+  const label = {Likely:'Yes', Borderline:'Maybe', Unlikely:'No', NoData:'No data'}[cls];
 
-  const facts = p.cut25 ? `Your ${commLbl} rank: <b>${fmtR(rank)}</b>. Last ${commLbl} rank allotted in 2025 (${group}): <b>${fmtR(p.cut25)}</b>. ` +
-    `2026 has ${p.gRatio.toFixed(2)}× the seats, so the projected 2026 cutoff is about <b>${fmtR(p.proj26)}</b>.` : '';
+  const roundLines = p.cut25 ? '<ul class="rounds">' + [1,2,3].map(n =>
+    `<li><b>Round ${n}:</b> ${y[n-1] ? `Yes in ${plural(y[n-1])}` : 'No'}${m[n-1] ? ` · Maybe in ${plural(m[n-1])}` : ''}</li>`).join('') + '</ul>' : '';
+  const facts = p.cut25 ? `Your ${commLbl} community rank: <b>${fmtR(rank)}</b>. In 2025, the last ${commLbl} student to get a seat had rank <b>${fmtR(p.cut25)}</b>. For 2026 we guess about <b>${fmtR(p.proj26)}</b>.` : '';
 
-  const tr = p.rows.map(r => `<tr>
-    <td>${esc(DATA.colleges[r.k] || r.k)}</td>
-    <td><span class="tag ${r.status}">${r.status === 'NoData' ? 'No data' : r.status}</span></td>
-    <td class="n">${r.last ? fmtR(r.last) + ` <span class="note">(R${r.lastRound})</span>` : '–'}</td>
-    <td class="n">${r.proj ? fmtR(r.proj) : '–'}</td>
-    <td class="n hide-sm">${r.n || 0}</td>
-    <td class="n hide-sm">${r.s26 || 0}</td></tr>`).join('');
+  const tag = s => `<span class="tag ${CLS[s]}">${s}</span>`;
+  const tr = p.rows.map(x => `<tr>
+    <td>${esc(DATA.colleges[x.k] || x.k)}</td>
+    ${x.hasData ? x.r.map(s => `<td>${tag(s)}</td>`).join('') : '<td colspan="3"><span class="tag NoData">No 2025 data</span></td>'}
+    <td class="n hide-sm">${x.last ? fmtR(x.last) : '–'}</td></tr>`).join('');
 
-  const hint = isExample ? `<div class="card hint"><b>Example result</b> for a Science-group SCA student with community rank 200. Change <b>Group</b>, <b>Community</b> and <b>Community rank</b> above to your own details, then press <b>Check</b>.</div>` : '';
+  const hint = isExample ? `<div class="card hint"><b>Example:</b> Science group, SCA, community rank 200. <b>Change these to your details</b> above and press <b>Check</b>.</div>` : '';
   isExample = false;
   document.getElementById('out').innerHTML = hint + `
-    <div class="card"><p class="verdict"><span class="tag ${cls}" style="font-size:1rem">${cls==='NoData'?'No data':cls}</span> ${verdict}</p><p class="facts">${facts}</p></div>
+    <div class="card"><p class="verdict"><span class="tag ${cls}" style="font-size:1rem">${label}</span> ${verdict}</p>${roundLines}<p class="facts">${facts}</p></div>
     <div class="card scroll"><table>
-      <thead><tr><th>College</th><th>Chance</th><th>2025 last ${esc(commLbl)} rank</th><th>Projected 2026</th><th class="hide-sm">2025 ${esc(commLbl)} allotted</th><th class="hide-sm">2026 seats (all)</th></tr></thead>
+      <thead><tr><th>College</th><th>Round 1</th><th>Round 2</th><th>Round 3</th><th class="hide-sm">2025 last ${esc(commLbl)} rank</th></tr></thead>
       <tbody>${tr}</tbody></table></div>`;
 });
 </script>
