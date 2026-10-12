@@ -76,7 +76,7 @@ header.site{max-width:1080px;margin:0 auto;padding:20px 16px 0}
   <label>Community
     <select id="comm"><option>OC</option><option>BC</option><option>BCM</option><option value="MBC&amp;DNC">MBC/DNC</option><option>SC</option><option selected>SCA</option><option>ST</option></select></label>
   <label>Community rank
-    <input id="rank" type="number" min="1" inputmode="numeric" placeholder="e.g. 400" value="400" required></label>
+    <input id="rank" type="number" min="1" inputmode="numeric" placeholder="e.g. 200" value="200" required></label>
   <button type="submit">Check</button>
 </form>
 </div>
@@ -177,7 +177,7 @@ document.getElementById('f').addEventListener('submit', e => {
     <td class="n hide-sm">${r.n || 0}</td>
     <td class="n hide-sm">${r.s26 || 0}</td></tr>`).join('');
 
-  const hint = isExample ? `<div class="card hint"><b>Example result</b> for a Science-group SCA student with community rank 400. Change <b>Group</b>, <b>Community</b> and <b>Community rank</b> above to your own details, then press <b>Check</b>.</div>` : '';
+  const hint = isExample ? `<div class="card hint"><b>Example result</b> for a Science-group SCA student with community rank 200. Change <b>Group</b>, <b>Community</b> and <b>Community rank</b> above to your own details, then press <b>Check</b>.</div>` : '';
   isExample = false;
   document.getElementById('out').innerHTML = hint + `
     <div class="card"><p class="verdict"><span class="tag ${cls}" style="font-size:1rem">${cls==='NoData'?'No data':cls}</span> ${verdict}</p><p class="facts">${facts}</p></div>
