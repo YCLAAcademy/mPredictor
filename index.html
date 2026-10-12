@@ -48,6 +48,7 @@ header.site{max-width:1080px;margin:0 auto;padding:20px 16px 0}
 .site-title{font-size:1.6rem;font-weight:700}.site-title span{color:var(--accent)}
 .site-desc{margin:4px 0 0;color:var(--muted)}
 .brand{display:none}
+.hint{border-color:var(--accent);background:var(--mid-bg)}
 </style>
 </head>
 <body>
@@ -75,7 +76,7 @@ header.site{max-width:1080px;margin:0 auto;padding:20px 16px 0}
   <label>Community
     <select id="comm"><option>OC</option><option>BC</option><option>BCM</option><option value="MBC&amp;DNC">MBC/DNC</option><option>SC</option><option selected>SCA</option><option>ST</option></select></label>
   <label>Community rank
-    <input id="rank" type="number" min="1" inputmode="numeric" placeholder="e.g. 400" required></label>
+    <input id="rank" type="number" min="1" inputmode="numeric" placeholder="e.g. 400" value="400" required></label>
   <button type="submit">Check</button>
 </form>
 </div>
@@ -112,7 +113,8 @@ document.querySelectorAll('nav.tabs button').forEach(b => b.addEventListener('cl
 }));
 let DATA;
 const fmtR = n => n.toLocaleString('en-IN');
-fetch('data/dgnm.json').then(r => r.json()).then(d => { DATA = d; }).catch(() => {
+let isExample = true;
+fetch('data/dgnm.json').then(r => r.json()).then(d => { DATA = d; document.getElementById('f').requestSubmit(); }).catch(() => {
   document.getElementById('out').innerHTML = '<div class="card">Could not load data.</div>';
 });
 
@@ -175,7 +177,9 @@ document.getElementById('f').addEventListener('submit', e => {
     <td class="n hide-sm">${r.n || 0}</td>
     <td class="n hide-sm">${r.s26 || 0}</td></tr>`).join('');
 
-  document.getElementById('out').innerHTML = `
+  const hint = isExample ? `<div class="card hint"><b>Example result</b> for a Science-group SCA student with community rank 400. Change <b>Group</b>, <b>Community</b> and <b>Community rank</b> above to your own details, then press <b>Check</b>.</div>` : '';
+  isExample = false;
+  document.getElementById('out').innerHTML = hint + `
     <div class="card"><p class="verdict"><span class="tag ${cls}" style="font-size:1rem">${cls==='NoData'?'No data':cls}</span> ${verdict}</p><p class="facts">${facts}</p></div>
     <div class="card scroll"><table>
       <thead><tr><th>College</th><th>Chance</th><th>2025 last ${esc(commLbl)} rank</th><th>Projected 2026</th><th class="hide-sm">2025 ${esc(commLbl)} allotted</th><th class="hide-sm">2026 seats (all)</th></tr></thead>
