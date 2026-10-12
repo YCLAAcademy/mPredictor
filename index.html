@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>mPredictor</title>
-<meta name="description" content="Estimate your chance of a Tamil Nadu government DGNM (Diploma in Nursing) seat from your community rank, based on 2025 counselling results.">
+<meta name="description" content="TN Medical Counselling College Predictor for DGNM, Paramedical, D.Pharm and MBBS/BDS courses, using past and present counselling data.">
 <style>
 :root{--bg:#f7f7f5;--card:#fff;--fg:#1d1d1b;--muted:#6b6b66;--line:#e3e2dd;--accent:#0b6e4f;
 --good:#1a7f37;--good-bg:#e6f4ea;--mid:#9a6700;--mid-bg:#fff4d6;--bad:#b42318;--bad-bg:#fdecea;--na:#6b6b66;--na-bg:#f0efeb}
@@ -44,9 +44,17 @@ main{flex:1;min-width:0;max-width:none;margin:0;padding:0}
 @media (max-width:720px){.layout{flex-direction:column;gap:12px}
  nav.tabs{position:static;flex-direction:row;overflow-x:auto;flex-basis:auto}
  nav.tabs button{white-space:nowrap}.brand{display:none}}
+header.site{max-width:1080px;margin:0 auto;padding:20px 16px 0}
+.site-title{font-size:1.6rem;font-weight:700}.site-title span{color:var(--accent)}
+.site-desc{margin:4px 0 0;color:var(--muted)}
+.brand{display:none}
 </style>
 </head>
 <body>
+<header class="site">
+  <div class="site-title"><span>m</span>Predictor</div>
+  <p class="site-desc">TN Medical Counselling College Predictor for DGNM, Paramedical, D.Pharm and MBBS/BDS courses, using past and present counselling data.</p>
+</header>
 <div class="layout">
 <nav class="tabs" role="tablist" aria-label="Course">
   <div class="brand"><span>m</span>Predictor</div>
