@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mPredictor – DGNM Seat Chances</title>
+<meta name="description" content="Estimate your chance of a Tamil Nadu government DGNM (Diploma in Nursing) seat from your community rank, based on 2025 counselling results.">
+<style>
+:root{--bg:#f7f7f5;--card:#fff;--fg:#1d1d1b;--muted:#6b6b66;--line:#e3e2dd;--accent:#0b6e4f;
+--good:#1a7f37;--good-bg:#e6f4ea;--mid:#9a6700;--mid-bg:#fff4d6;--bad:#b42318;--bad-bg:#fdecea;--na:#6b6b66;--na-bg:#f0efeb}
+@media (prefers-color-scheme:dark){:root{--bg:#141413;--card:#1f1f1d;--fg:#ecebe6;--muted:#a3a29b;--line:#34332f;--accent:#4fc39a;
+--good:#6fd28a;--good-bg:#173323;--mid:#e8b94a;--mid-bg:#3a2e10;--bad:#f38b80;--bad-bg:#3d1a17;--na:#a3a29b;--na-bg:#2a2a27}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:24px 16px 48px}
+h1{margin:0 0 4px;font-size:1.7rem}h1 span{color:var(--accent)}
+.sub{color:var(--muted);margin:0 0 20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px}
+form{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;align-items:end}
+label{display:flex;flex-direction:column;font-size:.85rem;color:var(--muted);gap:4px}
+select,input,button{font:inherit;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg)}
+button{background:var(--accent);color:#fff;border:0;font-weight:600;cursor:pointer}
+.verdict{font-size:1.15rem;font-weight:600;margin:0 0 6px}
+.facts{color:var(--muted);margin:0;font-size:.95rem}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500;font-size:.8rem}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:.8rem;font-weight:600;white-space:nowrap}
+.Likely{color:var(--good);background:var(--good-bg)}.Borderline{color:var(--mid);background:var(--mid-bg)}
+.Unlikely{color:var(--bad);background:var(--bad-bg)}.NoData{color:var(--na);background:var(--na-bg)}
+.scroll{overflow-x:auto}
+.note{font-size:.85rem;color:var(--muted)}
+.note li{margin-bottom:4px}
+@media (max-width:560px){.hide-sm{display:none}}
+</style>
+</head>
+<body>
+<main>
+<h1><span>m</span>Predictor</h1>
+<p class="sub">Tamil Nadu DGNM (Diploma in General Nursing &amp; Midwifery): your chance of a <b>government college</b> seat, based on 2025 counselling results.</p>
+
+<div class="card">
+<form id="f">
+  <label>Group
+    <select id="group"><option>Science</option><option>Vocational</option><option>Others</option></select></label>
+  <label>Community
+    <select id="comm"><option>OC</option><option>BC</option><option>BCM</option><option value="MBC&amp;DNC">MBC/DNC</option><option>SC</option><option selected>SCA</option><option>ST</option></select></label>
+  <label>Community rank
+    <input id="rank" type="number" min="1" inputmode="numeric" placeholder="e.g. 400" required></label>
+  <button type="submit">Check</button>
+</form>
+</div>
+
+<div id="out"></div>
+
+<div class="card note">
+<b>How this works</b>
+<ul>
+<li>For each college, it finds the <b>last community rank allotted</b> to your community in 2025 (all 3 rounds, regular seats only).</li>
+<li>2026 has more government seats, so that cutoff is scaled by the college's 2026 ÷ 2025 seat ratio to give a <b>projected 2026 cutoff</b>.</li>
+<li><b>Likely</b>: your rank is within 90% of the projected cutoff. <b>Borderline</b>: within ±10%. <b>Unlikely</b>: beyond that.</li>
+<li>Special quotas (Ex-servicemen, Sports, PWD, IRT Ward) and self-financing colleges are not included.</li>
+<li>This is an estimate from one year of data, not an official prediction. Actual cutoffs depend on applicants, choices and drop-outs.</li>
+<li>No candidate names or application numbers are used or stored on this site. Only seat counts and cutoff ranks.</li>
+</ul>
+</div>
+</main>
+
+<script>
+let DATA;
+const fmtR = n => n.toLocaleString('en-IN');
+fetch('data/dgnm.json').then(r => r.json()).then(d => { DATA = d; }).catch(() => {
+  document.getElementById('out').innerHTML = '<div class="card">Could not load data.</div>';
+});
+
+function sum(o){ return o ? Object.values(o).reduce((a,b)=>a+b,0) : 0; }
+
+function predict(group, comm, rank){
+  const g = DATA.groups[group], c = g.communities[comm];
+  const tot25 = Object.values(g.seats2025).reduce((a,o)=>a+sum(o),0);
+  const tot26 = Object.values(g.seats2026).reduce((a,o)=>a+sum(o),0);
+  const gRatio = tot25 ? tot26 / tot25 : 1;
+  const keys = new Set([...Object.keys(g.seats2026), ...Object.keys(c.colleges)]);
+  const rows = [];
+  for (const k of keys) {
+    const hist = c.colleges[k];
+    const s25 = sum(g.seats2025[k]), s26 = sum(g.seats2026[k]);
+    const ratio = (s25 && s26) ? s26 / s25 : gRatio;
+    if (!hist) { rows.push({k, status:'NoData', s26}); continue; }
+    const rounds = Object.entries(hist);
+    const last = Math.max(...rounds.map(([,v]) => v.last));
+    const n = rounds.reduce((a,[,v]) => a + v.n, 0);
+    const lastRound = rounds.find(([,v]) => v.last === last)[0];
+    const proj = Math.round(last * ratio);
+    const status = rank <= proj * 0.9 ? 'Likely' : rank <= proj * 1.1 ? 'Borderline' : 'Unlikely';
+    rows.push({k, status, last, lastRound, proj, n, s26});
+  }
+  const order = {Likely:0, Borderline:1, Unlikely:2, NoData:3};
+  rows.sort((a,b) => order[a.status]-order[b.status] || (b.proj||0)-(a.proj||0));
+  const withData = rows.filter(r => r.last);
+  const cut25 = withData.length ? Math.max(...withData.map(r => r.last)) : null;
+  return {rows, cut25, proj26: cut25 ? Math.round(cut25 * gRatio) : null, gRatio, c};
+}
+
+function esc(s){ return String(s).replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch])); }
+
+document.getElementById('f').addEventListener('submit', e => {
+  e.preventDefault();
+  if (!DATA) return;
+  const group = document.getElementById('group').value;
+  const comm = document.getElementById('comm').value;
+  const rank = parseInt(document.getElementById('rank').value, 10);
+  if (!(rank > 0)) return;
+  const p = predict(group, comm, rank);
+  const likely = p.rows.filter(r => r.status === 'Likely').length;
+  const border = p.rows.filter(r => r.status === 'Borderline').length;
+  const commLbl = comm.replace('&', '/');
+  let verdict, cls;
+  if (!p.cut25) { verdict = `No 2025 ${commLbl} allotments found for the ${group} group.`; cls='NoData'; }
+  else if (likely) { verdict = `Good chance: likely at ${likely} college${likely>1?'s':''}` + (border ? `, borderline at ${border} more.` : '.'); cls='Likely'; }
+  else if (border) { verdict = `Borderline: possible at ${border} college${border>1?'s':''}, most likely in a later round.`; cls='Borderline'; }
+  else { verdict = 'Unlikely for a government seat. Consider self-financing colleges as a backup.'; cls='Unlikely'; }
+
+  const facts = p.cut25 ? `Your ${commLbl} rank: <b>${fmtR(rank)}</b>. Last ${commLbl} rank allotted in 2025 (${group}): <b>${fmtR(p.cut25)}</b>. ` +
+    `2026 has ${p.gRatio.toFixed(2)}× the seats, so the projected 2026 cutoff is about <b>${fmtR(p.proj26)}</b>.` : '';
+
+  const tr = p.rows.map(r => `<tr>
+    <td>${esc(DATA.colleges[r.k] || r.k)}</td>
+    <td><span class="tag ${r.status}">${r.status === 'NoData' ? 'No data' : r.status}</span></td>
+    <td class="n">${r.last ? fmtR(r.last) + ` <span class="note">(R${r.lastRound})</span>` : '–'}</td>
+    <td class="n">${r.proj ? fmtR(r.proj) : '–'}</td>
+    <td class="n hide-sm">${r.n || 0}</td>
+    <td class="n hide-sm">${r.s26 || 0}</td></tr>`).join('');
+
+  document.getElementById('out').innerHTML = `
+    <div class="card"><p class="verdict"><span class="tag ${cls}" style="font-size:1rem">${cls==='NoData'?'No data':cls}</span> ${verdict}</p><p class="facts">${facts}</p></div>
+    <div class="card scroll"><table>
+      <thead><tr><th>College</th><th>Chance</th><th>2025 last ${esc(commLbl)} rank</th><th>Projected 2026</th><th class="hide-sm">2025 ${esc(commLbl)} allotted</th><th class="hide-sm">2026 seats (all)</th></tr></thead>
+      <tbody>${tr}</tbody></table></div>`;
+});
+</script>
+</body>
+</html>
