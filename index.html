@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>mPredictor</title>
-<meta name="description" content="TN Medical Counselling College Predictor for DGNM, Paramedical, D.Pharm and MBBS/BDS courses, using past and present counselling data.">
+<meta name="description" content="TN Medical Counselling College Predictor for DGNM.">
 <style>
 :root{--bg:#f7f7f5;--card:#fff;--fg:#1d1d1b;--muted:#6b6b66;--line:#e3e2dd;--accent:#0b6e4f;
 --good:#1a7f37;--good-bg:#e6f4ea;--mid:#9a6700;--mid-bg:#fff4d6;--bad:#b42318;--bad-bg:#fdecea;--na:#6b6b66;--na-bg:#f0efeb}
@@ -69,18 +69,18 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
 .rl.sci,.rl.voc,.rl.oth{color:var(--c);border-color:var(--c);background:var(--cb)}
 .rl:hover{filter:brightness(.95);text-decoration:underline}
 </style>
+<script data-goatcounter="https://ycla.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 <header class="site">
   <div class="site-title"><span>m</span>Predictor</div>
-  <p class="site-desc">TN Medical Counselling College Predictor for DGNM, Paramedical, D.Pharm and MBBS/BDS courses, using past and present counselling data.</p>
+  <p class="site-desc">TN Medical Counselling College Predictor</p>
 </header>
 <div class="layout">
 <nav class="tabs" role="tablist" aria-label="Course">
   <div class="brand"><span>m</span>Predictor</div>
   <button role="tab" data-tab="dgnm" aria-selected="true">DGNM</button>
-  <button role="tab" data-tab="paramed" aria-selected="false">Paramedical<span class="soon">soon</span></button>
-  <button role="tab" data-tab="dpharm" aria-selected="false">D.Pharm<span class="soon">soon</span></button>
   <button role="tab" data-tab="mbbs" aria-selected="false">MBBS / BDS<span class="soon">soon</span></button>
 </nav>
 <main>
@@ -90,6 +90,7 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
 <a href="#f" class="banner" aria-label="Go to the predictor form"><img src="image/dgnm.jpg" width="1600" height="893" alt="TN Medical Counselling College Predictor – which nursing college can I get?"></a>
 
 <div class="card">
+<h2>Enter your details</h2>
 <form id="f">
   <label>Group
     <select id="group"><option>Science</option><option>Vocational</option><option>Others</option></select></label>
@@ -138,7 +139,7 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
 </div>
 
 <script>
-const TAGS = {dgnm:'DGNM', paramed:'PARAMED', dpharm:'DPHARM', mbbs:'MBBS-BDS'};
+const TAGS = {dgnm:'DGNM', mbbs:'MBBS-BDS'};
 const REPO = 'https://github.com/YCLAAcademy/mPredictor/issues/new';
 document.getElementById('fb').addEventListener('submit', e => {
   e.preventDefault();
@@ -148,7 +149,7 @@ document.getElementById('fb').addEventListener('submit', e => {
   const title = `[${tag}] ` + text.split('\n')[0].slice(0, 60);
   window.open(`${REPO}?title=${encodeURIComponent(title)}&body=${encodeURIComponent(text)}`, '_blank', 'noopener');
 });
-const NAMES = {paramed:'Paramedical', dpharm:'D.Pharm', mbbs:'MBBS / BDS'};
+const NAMES = {mbbs:'MBBS / BDS'};
 document.querySelectorAll('nav.tabs button').forEach(b => b.addEventListener('click', () => {
   document.querySelectorAll('nav.tabs button').forEach(x => x.setAttribute('aria-selected', x === b));
   const t = b.dataset.tab;
