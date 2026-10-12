@@ -60,6 +60,7 @@ table.pred{table-layout:fixed;font-size:clamp(.72rem,2.6vw,.92rem)}
 table.pred th,table.pred td{padding:.5em .3em;overflow-wrap:anywhere}
 table.pred th:not(:first-child),table.pred td:not(:first-child){text-align:center}
 table.pred .tag{padding:.15em .5em;font-size:.85em}
+.rl{display:inline-block;margin-top:10px;padding:8px 12px;border:1px solid var(--accent);border-radius:8px;color:var(--accent);font-weight:600;text-decoration:none}
 </style>
 </head>
 <body>
@@ -91,7 +92,8 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
     <input id="rank" type="number" min="1" inputmode="numeric" placeholder="e.g. 200" value="200" required></label>
   <button type="submit">Check</button>
 </form>
-<p class="note" style="margin:10px 0 0">Enter your <b>COMMUNITY RANK</b> (last column in the rank list). Do not enter the overall RANK.</p>
+<p class="note" style="margin:10px 0 0">Find your name in the rank list. Enter your <b>COMMUNITY RANK</b> (last column). Do not enter the overall RANK.</p>
+<a id="rl" class="rl" href="https://tnmedicalselection.net/news/12082026004204.pdf" target="_blank" rel="noopener">📄 Rank list – <span id="rl-g">Science</span> (official)</a>
 </div>
 
 <div id="out"></div>
@@ -122,6 +124,15 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
 </div>
 
 <script>
+const RANKLIST = {
+  Science: 'https://tnmedicalselection.net/news/12082026004204.pdf',
+  Vocational: 'https://tnmedicalselection.net/news/12082026004238.pdf',
+  Others: 'https://tnmedicalselection.net/news/12082026004300.pdf',
+};
+document.getElementById('group').addEventListener('change', e => {
+  document.getElementById('rl').href = RANKLIST[e.target.value];
+  document.getElementById('rl-g').textContent = e.target.value;
+});
 const TAGS = {dgnm:'DGNM', paramed:'PARAMED', dpharm:'DPHARM', mbbs:'MBBS-BDS'};
 const REPO = 'https://github.com/YCLAAcademy/mPredictor/issues/new';
 document.getElementById('fb').addEventListener('submit', e => {
