@@ -54,6 +54,7 @@ header.site{max-width:1080px;margin:0 auto;padding:20px 16px 0}
 .feedback form{display:flex;flex-direction:column;gap:8px}
 textarea{font:inherit;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);resize:vertical}
 .feedback button{align-self:flex-start}
+.caution{margin:0 0 16px;padding:12px 14px;border-radius:12px;border:2px solid var(--bad);background:var(--bad-bg);color:var(--bad);font-weight:600}
 </style>
 </head>
 <body>
@@ -215,6 +216,7 @@ document.getElementById('f').addEventListener('submit', e => {
   isExample = false;
   document.getElementById('out').innerHTML = hint + `
     <div class="card"><p class="verdict"><span class="tag ${cls}" style="font-size:1rem">${label}</span> ${verdict}</p>${roundLines}<p class="facts">${facts}</p></div>
+    <div class="caution" role="note">⚠️ <b>Please note:</b> This is only a prediction. It is not official. Real results can change.</div>
     <div class="card scroll"><table>
       <thead><tr><th>College</th><th>Round 1</th><th>Round 2</th><th>Round 3</th><th class="hide-sm">2025 last ${esc(commLbl)} rank</th></tr></thead>
       <tbody>${tr}</tbody></table></div>`;
