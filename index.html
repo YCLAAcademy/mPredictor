@@ -93,7 +93,7 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
 <main>
 <section id="tab-dgnm">
 <h1>DGNM</h1>
-<p class="sub">DGNM (Nursing Diploma), Tamil Nadu. Find your chance for a <b>government college</b> seat, and in which <b>round</b>. Based on 2025 counselling results.</p>
+<p class="sub">DGNM (Nursing Diploma), Tamil Nadu. Find your chance for a <b>government college</b> seat, and in which <b>round</b>. Based on 2025 counselling results, with 2026 Round 1 results shown.</p>
 <a href="#f" class="banner" aria-label="Go to the predictor form"><img src="image/dgnm.jpg" width="1600" height="893" alt="TN Medical Counselling College Predictor – which nursing college can I get?"></a>
 
 <div class="card">
@@ -103,11 +103,11 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
     <select id="group"><option>Science</option><option>Vocational</option><option>Others</option></select></label>
   <label>Community
     <select id="comm"><option>OC</option><option>BC</option><option>BCM</option><option value="MBC&amp;DNC">MBC/DNC</option><option>SC</option><option selected>SCA</option><option>ST</option></select></label>
-  <label>Community rank
+  <label><span id="rank-l">Community rank</span>
     <input id="rank" type="number" min="1" inputmode="numeric" placeholder="e.g. 200" value="200" required></label>
   <button type="submit">Check</button>
 </form>
-<p class="note" style="margin:10px 0 0">Find your name in the rank list. Enter your <b>COMMUNITY RANK</b> (last column). Do not enter the overall RANK.</p>
+<p class="note" id="help" style="margin:10px 0 0">Find your name in the rank list. Enter your <b>COMMUNITY RANK</b> (last column). Do not enter the overall RANK.</p>
 <div class="rl-box">
   <div class="rl-title">📄 Find your Community Rank:</div>
   <div class="rl-btns">
@@ -126,13 +126,16 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
 <li><b>Yes</b> = good chance. <b>Maybe</b> = small chance. <b>No</b> = not likely.</li>
 <li>We use past counselling data (2025): the last rank that got a seat, for your community, in each college and round.</li>
 <li>2026 has more government seats. So we increase the 2025 last rank a little, to guess the 2026 last rank.</li>
+<li>OC has no community rank, so for OC we use the overall rank in your group's rank list.</li>
+<li>The <b>2026 last rank</b> column shows the real 2026 result so far (Round 1).</li>
+<li>Sports, Ex-servicemen, PwD and IRT ward seats and self-financing colleges are not included.</li>
 <li>This is only a prediction. It is not official. Real results can change.</li>
 </ul>
 </div>
 </section>
 <section id="tab-mbbs" hidden>
 <h1>MBBS / BDS</h1>
-<p class="sub">MBBS and BDS, Tamil Nadu. Find your chance for a seat in the <b>7.5% Govt school</b>, <b>general</b> or <b>management</b> quota, and in which <b>round</b>. Based on 2025 counselling results, with 2026 Round 1 and 2 results shown.</p>
+<p class="sub">MBBS and BDS, Tamil Nadu. Find your chance for a seat in the <b>7.5% Govt school</b>, <b>general</b> or <b>management</b> quota, and in which <b>round</b>. Based on 2025 counselling results, with 2026 Round 1 to 3 results shown.</p>
 
 <div class="card">
 <h2>Enter your details</h2>
@@ -166,7 +169,7 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
 <li><b>Yes</b> = good chance. <b>Maybe</b> = small chance. <b>No</b> = not likely.</li>
 <li>We use 2025 counselling data: the last rank that got a seat, for your quota and community, in each college and round.</li>
 <li>If a college has more (or fewer) seats in 2026, we raise (or lower) the 2025 last rank a little.</li>
-<li>The <b>2026 last rank</b> column shows the real 2026 result so far (up to Round 2).</li>
+<li>The <b>2026 last rank</b> column shows the real 2026 result so far (up to Round 3).</li>
 <li>Sports, Ex-servicemen, PwD, NRI, minority and CMC seats are not included.</li>
 <li>This is only a prediction. It is not official. Real results can change.</li>
 </ul>
@@ -243,6 +246,14 @@ document.querySelectorAll('nav.tabs button').forEach(b => b.addEventListener('cl
   if (t === 'paramed') loadParamed();
   if (t === 'mbbs') loadMbbs();
 }));
+function dForm(){
+  const oc = document.getElementById('comm').value === 'OC';
+  document.getElementById('rank-l').textContent = oc ? 'Overall rank' : 'Community rank';
+  document.getElementById('help').innerHTML = oc
+    ? 'Find your name in your group\'s rank list. OC has no community rank, so enter your overall <b>RANK</b>.'
+    : 'Find your name in the rank list. Enter your <b>COMMUNITY RANK</b> (last column). Do not enter the overall RANK.';
+}
+document.getElementById('comm').addEventListener('change', dForm);
 let DATA;
 const fmtR = n => n.toLocaleString('en-IN');
 let isExample = true;
@@ -257,12 +268,14 @@ function predict(group, comm, rank){
   const tot25 = Object.values(g.seats2025).reduce((a,o)=>a+sum(o),0);
   const tot26 = Object.values(g.seats2026).reduce((a,o)=>a+sum(o),0);
   const gRatio = tot25 ? tot26 / tot25 : 1;
-  const keys = new Set([...Object.keys(g.seats2026), ...Object.keys(c.colleges)]);
+  const c26 = c.colleges2026 || {};
+  const keys = new Set([...Object.keys(g.seats2026), ...Object.keys(c.colleges), ...Object.keys(c26)]);
   const rows = [];
-  let cut25 = null;
+  let cut25 = null, cut26 = null;
   for (const k of keys) {
     const hist = c.colleges[k] || {};
     const s25 = sum(g.seats2025[k]), s26 = sum(g.seats2026[k]);
+    if (s25 && !s26) continue;                    // no government seats here in 2026
     const ratio = (s25 && s26) ? s26 / s25 : gRatio;
     // cumulative last rank up to each round, then each round's chance
     let cum = 0, best = null, last = null;
@@ -273,14 +286,16 @@ function predict(group, comm, rank){
       const s = rank <= proj * 0.9 ? 'Yes' : rank <= proj * 1.1 ? 'Maybe' : 'No';
       return s;
     });
+    const last26 = Math.max(0, ...Object.values(c26[k] || {}).map(x => x.last)) || null;
     if (last) cut25 = Math.max(cut25 || 0, last);
+    if (last26) cut26 = Math.max(cut26 || 0, last26);
     const yes = r.indexOf('Yes'), maybe = r.indexOf('Maybe');
     best = yes >= 0 ? {round: yes+1, s:'Yes'} : maybe >= 0 ? {round: maybe+1, s:'Maybe'} : null;
-    rows.push({k, r, last, best, proj: last ? Math.round(last * ratio) : null, hasData: !!last});
+    rows.push({k, r, last, last26, best, proj: last ? Math.round(last * ratio) : null, hasData: !!last});
   }
   const key = x => x.best ? (x.best.s === 'Yes' ? 0 : 3) + x.best.round : 9;
   rows.sort((a,b) => key(a)-key(b) || (b.proj||0)-(a.proj||0));
-  return {rows, cut25, proj26: cut25 ? Math.round(cut25 * gRatio) : null};
+  return {rows, cut25, cut26, proj26: cut25 ? Math.round(cut25 * gRatio) : null};
 }
 
 function esc(s){ return String(s).replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch])); }
@@ -296,6 +311,7 @@ document.getElementById('f').addEventListener('submit', e => {
   if (!(rank > 0)) return;
   const p = predict(group, comm, rank);
   const commLbl = comm.replace('&', '/');
+  const rankLbl = comm === 'OC' ? 'OC overall rank' : `${commLbl} community rank`;
   const yesIn = n => p.rows.filter(x => x.r[n-1] === 'Yes').length;
   const maybeIn = n => p.rows.filter(x => x.r[n-1] === 'Maybe').length;
   const y = [1,2,3].map(yesIn), m = [1,2,3].map(maybeIn);
@@ -311,13 +327,14 @@ document.getElementById('f').addEventListener('submit', e => {
 
   const roundLines = p.cut25 ? '<ul class="rounds">' + [1,2,3].map(n =>
     `<li><b>Round ${n}:</b> ${y[n-1] ? `Yes in ${plural(y[n-1])}` : 'No'}${m[n-1] ? ` · Maybe in ${plural(m[n-1])}` : ''}</li>`).join('') + '</ul>' : '';
-  const facts = p.cut25 ? `Your ${commLbl} community rank: <b>${fmtR(rank)}</b>. In 2025, the last ${commLbl} student to get a seat had rank <b>${fmtR(p.cut25)}</b>. For 2026 we guess about <b>${fmtR(p.proj26)}</b>.` : '';
+  const facts = p.cut25 ? `Your ${rankLbl}: <b>${fmtR(rank)}</b>. In 2025, the last ${commLbl} student to get a seat had rank <b>${fmtR(p.cut25)}</b>. For 2026 we guess about <b>${fmtR(p.proj26)}</b>.`
+    + (p.cut26 ? ` In 2026 Round 1 it was <b>${fmtR(p.cut26)}</b>.` : '') : '';
 
   const tag = s => `<span class="tag ${CLS[s]}">${s}</span>`;
   const tr = p.rows.map(x => `<tr>
     <td>${esc(DATA.colleges[x.k] || x.k)}</td>
     ${x.hasData ? x.r.map(s => `<td>${tag(s)}</td>`).join('') : '<td colspan="3"><span class="tag NoData">No 2025 data</span></td>'}
-    <td class="n">${x.last ? fmtR(x.last) : '–'}</td></tr>`).join('');
+    <td class="n">${x.last ? fmtR(x.last) : '–'}</td><td class="n">${x.last26 ? fmtR(x.last26) : '–'}</td></tr>`).join('');
 
   const hint = isExample ? `<div class="card hint"><b>Example:</b> Science group, SCA, community rank 200. <b>Change these to your details</b> above and press <b>Check</b>.</div>` : '';
   isExample = false;
@@ -325,8 +342,8 @@ document.getElementById('f').addEventListener('submit', e => {
     <div class="card"><p class="verdict"><span class="tag ${cls}" style="font-size:1rem">${label}</span> ${verdict}</p>${roundLines}<p class="facts">${facts}</p></div>
     <div class="caution" role="note">⚠️ <b>Please note:</b> This is only a prediction. It is not official. Real results can change.</div>
     <div class="card scroll"><h2>Prediction</h2><table class="pred">
-      <colgroup><col style="width:40%"><col style="width:15%"><col style="width:15%"><col style="width:15%"><col style="width:15%"></colgroup>
-      <thead><tr><th>College</th><th>Round 1</th><th>Round 2</th><th>Round 3</th><th>2025 last rank</th></tr></thead>
+      <colgroup><col style="width:34%"><col style="width:12%"><col style="width:12%"><col style="width:12%"><col style="width:15%"><col style="width:15%"></colgroup>
+      <thead><tr><th>College</th>${[1,2,3].map(n => `<th><span class="hide-sm">Round </span><span class="show-sm">R</span>${n}</th>`).join('')}<th>2025 last rank</th><th>2026 last rank</th></tr></thead>
       <tbody>${tr}</tbody></table></div>`;
 });
 </script>
@@ -420,7 +437,7 @@ document.getElementById('mf').addEventListener('submit', e => {
   const roundLines = p.cut25 ? '<ul class="rounds">' + [1,2,3].map(n =>
     `<li><b>Round ${n}:</b> ${y[n-1] ? `Yes in ${plural(y[n-1])}` : 'No'}${m[n-1] ? ` · Maybe in ${plural(m[n-1])}` : ''}</li>`).join('') + '</ul>' : '';
   const facts = p.cut25 ? `Your ${rankLbl}: <b>${fmtR(rank)}</b>. In 2025, the last ${who} student to get a ${course} seat had rank <b>${fmtR(p.cut25)}</b>.`
-    + (p.cut26 ? ` In 2026 (up to Round 2) it was <b>${fmtR(p.cut26)}</b>.` : '') : '';
+    + (p.cut26 ? ` In 2026 (up to Round 3) it was <b>${fmtR(p.cut26)}</b>.` : '') : '';
 
   const tag = s => `<span class="tag ${CLS[s]}">${s}</span>`;
   const tr = p.rows.map(x => `<tr>

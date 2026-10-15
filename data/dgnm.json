@@ -1,10 +1,10 @@
 {
  "colleges": {
   "chengalpet": "Chengalpet Medical College, Chengalpet",
-  "chidambaram": "Govt. School of Nursing, Chidambaram",
   "coimbatore": "Coimbatore Medical College, Coimbatore",
-  "cuddalore": "Govt. Medical College, Cuddalore",
-  "cuddalore_son": "Govt. Cuddalore School of Nursing",
+  "cuddalore_dhq": "Cuddalore District HQ Hospital",
+  "cuddalore_gmc": "Govt. Medical College, Cuddalore",
+  "cuddalore_son": "Govt. School of Nursing, Chidambaram",
   "dindigul": "Govt. Dindigul Medical College",
   "erode": "Govt. Erode Medical College, Erode",
   "kancheepuram": "Kancheepuram District Head Quarters Hospital",
@@ -33,6 +33,7 @@
    "communities": {
     "BC": {
      "applicants2025": 113,
+     "applicants2026": 135,
      "colleges": {
       "coimbatore": {
        "1": {
@@ -40,7 +41,7 @@
         "n": 2
        }
       },
-      "cuddalore": {
+      "cuddalore_dhq": {
        "1": {
         "last": 99,
         "n": 3
@@ -208,10 +209,115 @@
         "n": 1
        }
       }
+     },
+     "colleges2026": {
+      "chengalpet": {
+       "1": {
+        "last": 8,
+        "n": 1
+       }
+      },
+      "coimbatore": {
+       "1": {
+        "last": 84,
+        "n": 4
+       }
+      },
+      "dindigul": {
+       "1": {
+        "last": 67,
+        "n": 3
+       }
+      },
+      "kanyakumari": {
+       "1": {
+        "last": 58,
+        "n": 3
+       }
+      },
+      "kilpauk": {
+       "1": {
+        "last": 69,
+        "n": 1
+       }
+      },
+      "madurai": {
+       "1": {
+        "last": 25,
+        "n": 5
+       }
+      },
+      "mmc": {
+       "1": {
+        "last": 85,
+        "n": 6
+       }
+      },
+      "ramanathapuram": {
+       "1": {
+        "last": 130,
+        "n": 5
+       }
+      },
+      "salem": {
+       "1": {
+        "last": 132,
+        "n": 1
+       }
+      },
+      "stanley": {
+       "1": {
+        "last": 135,
+        "n": 4
+       }
+      },
+      "thanjavur": {
+       "1": {
+        "last": 123,
+        "n": 4
+       }
+      },
+      "theni": {
+       "1": {
+        "last": 91,
+        "n": 5
+       }
+      },
+      "thoothukudi": {
+       "1": {
+        "last": 134,
+        "n": 5
+       }
+      },
+      "tirunelveli": {
+       "1": {
+        "last": 73,
+        "n": 7
+       }
+      },
+      "tirupur": {
+       "1": {
+        "last": 116,
+        "n": 3
+       }
+      },
+      "trichy": {
+       "1": {
+        "last": 105,
+        "n": 6
+       }
+      },
+      "virudhunagar": {
+       "1": {
+        "last": 65,
+        "n": 5
+       }
+      }
      }
     },
     "BCM": {
      "applicants2025": 10,
+     "applicants2026": 22,
      "colleges": {
       "kanyakumari": {
        "1": {
@@ -253,10 +359,67 @@
         "n": 1
        }
       }
+     },
+     "colleges2026": {
+      "coimbatore": {
+       "1": {
+        "last": 7,
+        "n": 2
+       }
+      },
+      "dindigul": {
+       "1": {
+        "last": 9,
+        "n": 1
+       }
+      },
+      "erode": {
+       "1": {
+        "last": 2,
+        "n": 1
+       }
+      },
+      "kanyakumari": {
+       "1": {
+        "last": 6,
+        "n": 1
+       }
+      },
+      "madurai": {
+       "1": {
+        "last": 14,
+        "n": 1
+       }
+      },
+      "stanley": {
+       "1": {
+        "last": 18,
+        "n": 2
+       }
+      },
+      "thanjavur": {
+       "1": {
+        "last": 5,
+        "n": 1
+       }
+      },
+      "thoothukudi": {
+       "1": {
+        "last": 20,
+        "n": 1
+       }
+      },
+      "vellore": {
+       "1": {
+        "last": 17,
+        "n": 1
+       }
+      }
      }
     },
     "MBC&DNC": {
      "applicants2025": 145,
+     "applicants2026": 170,
      "colleges": {
       "chengalpet": {
        "1": {
@@ -268,19 +431,13 @@
         "n": 1
        }
       },
-      "chidambaram": {
-       "2": {
-        "last": 54,
-        "n": 1
-       }
-      },
       "coimbatore": {
        "1": {
         "last": 42,
         "n": 3
        }
       },
-      "cuddalore": {
+      "cuddalore_dhq": {
        "1": {
         "last": 115,
         "n": 2
@@ -289,6 +446,10 @@
       "cuddalore_son": {
        "1": {
         "last": 83,
+        "n": 1
+       },
+       "2": {
+        "last": 54,
         "n": 1
        }
       },
@@ -450,33 +611,152 @@
         "n": 4
        }
       }
+     },
+     "colleges2026": {
+      "coimbatore": {
+       "1": {
+        "last": 73,
+        "n": 4
+       }
+      },
+      "cuddalore_gmc": {
+       "1": {
+        "last": 45,
+        "n": 1
+       }
+      },
+      "dindigul": {
+       "1": {
+        "last": 128,
+        "n": 3
+       }
+      },
+      "erode": {
+       "1": {
+        "last": 88,
+        "n": 2
+       }
+      },
+      "kanyakumari": {
+       "1": {
+        "last": 166,
+        "n": 2
+       }
+      },
+      "kilpauk": {
+       "1": {
+        "last": 157,
+        "n": 3
+       }
+      },
+      "madurai": {
+       "1": {
+        "last": 72,
+        "n": 4
+       }
+      },
+      "mmc": {
+       "1": {
+        "last": 93,
+        "n": 4
+       }
+      },
+      "nagapattinam": {
+       "1": {
+        "last": 170,
+        "n": 4
+       }
+      },
+      "ramanathapuram": {
+       "1": {
+        "last": 151,
+        "n": 4
+       }
+      },
+      "salem": {
+       "1": {
+        "last": 162,
+        "n": 7
+       }
+      },
+      "stanley": {
+       "1": {
+        "last": 103,
+        "n": 3
+       }
+      },
+      "thanjavur": {
+       "1": {
+        "last": 34,
+        "n": 2
+       }
+      },
+      "theni": {
+       "1": {
+        "last": 109,
+        "n": 5
+       }
+      },
+      "thoothukudi": {
+       "1": {
+        "last": 156,
+        "n": 5
+       }
+      },
+      "tirunelveli": {
+       "1": {
+        "last": 61,
+        "n": 5
+       }
+      },
+      "trichy": {
+       "1": {
+        "last": 131,
+        "n": 3
+       }
+      },
+      "vellore": {
+       "1": {
+        "last": 125,
+        "n": 2
+       }
+      },
+      "virudhunagar": {
+       "1": {
+        "last": 99,
+        "n": 8
+       }
+      }
      }
     },
     "OC": {
      "applicants2025": 9,
+     "applicants2026": 5,
      "colleges": {
       "ramanathapuram": {
        "1": {
-        "last": null,
+        "last": 78,
         "n": 1
        }
       },
       "salem": {
        "1": {
-        "last": null,
+        "last": 173,
         "n": 1
        }
       },
       "trichy": {
        "1": {
-        "last": null,
+        "last": 56,
         "n": 1
        }
       }
-     }
+     },
+     "colleges2026": {}
     },
     "SC": {
      "applicants2025": 140,
+     "applicants2026": 219,
      "colleges": {
       "chengalpet": {
        "1": {
@@ -646,10 +926,151 @@
         "n": 4
        }
       }
+     },
+     "colleges2026": {
+      "chengalpet": {
+       "1": {
+        "last": 109,
+        "n": 2
+       }
+      },
+      "coimbatore": {
+       "1": {
+        "last": 90,
+        "n": 2
+       }
+      },
+      "cuddalore_dhq": {
+       "1": {
+        "last": 163,
+        "n": 1
+       }
+      },
+      "cuddalore_gmc": {
+       "1": {
+        "last": 205,
+        "n": 1
+       }
+      },
+      "dindigul": {
+       "1": {
+        "last": 114,
+        "n": 2
+       }
+      },
+      "erode": {
+       "1": {
+        "last": 186,
+        "n": 2
+       }
+      },
+      "kancheepuram": {
+       "1": {
+        "last": 219,
+        "n": 1
+       }
+      },
+      "kanyakumari": {
+       "1": {
+        "last": 89,
+        "n": 3
+       }
+      },
+      "kilpauk": {
+       "1": {
+        "last": 185,
+        "n": 1
+       }
+      },
+      "madurai": {
+       "1": {
+        "last": 59,
+        "n": 3
+       }
+      },
+      "mmc": {
+       "1": {
+        "last": 131,
+        "n": 3
+       }
+      },
+      "nagapattinam": {
+       "1": {
+        "last": 160,
+        "n": 5
+       }
+      },
+      "ramanathapuram": {
+       "1": {
+        "last": 106,
+        "n": 2
+       }
+      },
+      "salem": {
+       "1": {
+        "last": 176,
+        "n": 4
+       }
+      },
+      "stanley": {
+       "1": {
+        "last": 191,
+        "n": 4
+       }
+      },
+      "thanjavur": {
+       "1": {
+        "last": 140,
+        "n": 5
+       }
+      },
+      "theni": {
+       "1": {
+        "last": 127,
+        "n": 3
+       }
+      },
+      "thoothukudi": {
+       "1": {
+        "last": 83,
+        "n": 4
+       }
+      },
+      "tirunelveli": {
+       "1": {
+        "last": 62,
+        "n": 4
+       }
+      },
+      "tirupur": {
+       "1": {
+        "last": 212,
+        "n": 3
+       }
+      },
+      "trichy": {
+       "1": {
+        "last": 132,
+        "n": 2
+       }
+      },
+      "vellore": {
+       "1": {
+        "last": 199,
+        "n": 3
+       }
+      },
+      "virudhunagar": {
+       "1": {
+        "last": 33,
+        "n": 3
+       }
+      }
      }
     },
     "SCA": {
      "applicants2025": 26,
+     "applicants2026": 39,
      "colleges": {
       "coimbatore": {
        "1": {
@@ -697,11 +1118,81 @@
         "n": 1
        }
       }
+     },
+     "colleges2026": {
+      "coimbatore": {
+       "1": {
+        "last": 11,
+        "n": 2
+       }
+      },
+      "erode": {
+       "1": {
+        "last": 5,
+        "n": 1
+       }
+      },
+      "kilpauk": {
+       "1": {
+        "last": 38,
+        "n": 1
+       }
+      },
+      "madurai": {
+       "1": {
+        "last": 4,
+        "n": 1
+       }
+      },
+      "mmc": {
+       "1": {
+        "last": 33,
+        "n": 2
+       }
+      },
+      "ramanathapuram": {
+       "1": {
+        "last": 30,
+        "n": 2
+       }
+      },
+      "salem": {
+       "1": {
+        "last": 1,
+        "n": 1
+       }
+      },
+      "stanley": {
+       "1": {
+        "last": 36,
+        "n": 1
+       }
+      },
+      "theni": {
+       "1": {
+        "last": 9,
+        "n": 2
+       }
+      },
+      "tirupur": {
+       "1": {
+        "last": 14,
+        "n": 1
+       }
+      },
+      "trichy": {
+       "1": {
+        "last": 16,
+        "n": 1
+       }
+      }
      }
     },
     "ST": {
      "applicants2025": 2,
-     "colleges": {}
+     "applicants2026": 5,
+     "colleges": {},
+     "colleges2026": {}
     }
    },
    "seats2025": {
@@ -723,7 +1214,7 @@
      "SCA": 0,
      "ST": 1
     },
-    "cuddalore": {
+    "cuddalore_dhq": {
      "BC": 2,
      "BCM": 0,
      "MBC&DNC": 1,
@@ -950,12 +1441,21 @@
      "SCA": 1,
      "ST": 0
     },
-    "cuddalore": {
-     "BC": 4,
+    "cuddalore_dhq": {
+     "BC": 2,
+     "BCM": 0,
+     "MBC&DNC": 2,
+     "OC": 3,
+     "SC": 3,
+     "SCA": 0,
+     "ST": 0
+    },
+    "cuddalore_gmc": {
+     "BC": 2,
      "BCM": 1,
-     "MBC&DNC": 4,
-     "OC": 6,
-     "SC": 5,
+     "MBC&DNC": 2,
+     "OC": 3,
+     "SC": 2,
      "SCA": 0,
      "ST": 0
     },
@@ -1170,12 +1670,6 @@
         "n": 4
        }
       },
-      "chidambaram": {
-       "2": {
-        "last": 1035,
-        "n": 1
-       }
-      },
       "coimbatore": {
        "1": {
         "last": 738,
@@ -1190,7 +1684,7 @@
         "n": 2
        }
       },
-      "cuddalore": {
+      "cuddalore_dhq": {
        "1": {
         "last": 1256,
         "n": 14
@@ -1208,6 +1702,10 @@
        "1": {
         "last": 707,
         "n": 5
+       },
+       "2": {
+        "last": 1035,
+        "n": 1
        }
       },
       "dindigul": {
@@ -1488,6 +1986,158 @@
         "n": 1
        }
       }
+     },
+     "colleges2026": {
+      "chengalpet": {
+       "1": {
+        "last": 3005,
+        "n": 53
+       }
+      },
+      "coimbatore": {
+       "1": {
+        "last": 1691,
+        "n": 44
+       }
+      },
+      "cuddalore_dhq": {
+       "1": {
+        "last": 2262,
+        "n": 6
+       }
+      },
+      "cuddalore_gmc": {
+       "1": {
+        "last": 3018,
+        "n": 13
+       }
+      },
+      "dindigul": {
+       "1": {
+        "last": 1483,
+        "n": 32
+       }
+      },
+      "erode": {
+       "1": {
+        "last": 3031,
+        "n": 30
+       }
+      },
+      "kancheepuram": {
+       "1": {
+        "last": 2960,
+        "n": 7
+       }
+      },
+      "kanyakumari": {
+       "1": {
+        "last": 1162,
+        "n": 39
+       }
+      },
+      "kgh": {
+       "1": {
+        "last": 3025,
+        "n": 32
+       }
+      },
+      "kilpauk": {
+       "1": {
+        "last": 2297,
+        "n": 50
+       }
+      },
+      "madurai": {
+       "1": {
+        "last": 1479,
+        "n": 38
+       }
+      },
+      "mmc": {
+       "1": {
+        "last": 1148,
+        "n": 38
+       }
+      },
+      "nagapattinam": {
+       "1": {
+        "last": 3028,
+        "n": 47
+       }
+      },
+      "ooty": {
+       "1": {
+        "last": 3021,
+        "n": 14
+       }
+      },
+      "ramanathapuram": {
+       "1": {
+        "last": 2803,
+        "n": 50
+       }
+      },
+      "salem": {
+       "1": {
+        "last": 2543,
+        "n": 47
+       }
+      },
+      "stanley": {
+       "1": {
+        "last": 1638,
+        "n": 48
+       }
+      },
+      "thanjavur": {
+       "1": {
+        "last": 1503,
+        "n": 41
+       }
+      },
+      "theni": {
+       "1": {
+        "last": 1428,
+        "n": 40
+       }
+      },
+      "thoothukudi": {
+       "1": {
+        "last": 1422,
+        "n": 39
+       }
+      },
+      "tirunelveli": {
+       "1": {
+        "last": 845,
+        "n": 31
+       }
+      },
+      "tirupur": {
+       "1": {
+        "last": 2997,
+        "n": 47
+       }
+      },
+      "trichy": {
+       "1": {
+        "last": 1836,
+        "n": 41
+       }
+      },
+      "vellore": {
+       "1": {
+        "last": 3045,
+        "n": 43
+       }
+      },
+      "virudhunagar": {
+       "1": {
+        "last": 1424,
+        "n": 46
+       }
+      }
      }
     },
     "BCM": {
@@ -1514,7 +2164,7 @@
         "n": 3
        }
       },
-      "cuddalore": {
+      "cuddalore_dhq": {
        "1": {
         "last": 133,
         "n": 1
@@ -1714,6 +2364,128 @@
         "n": 2
        }
       }
+     },
+     "colleges2026": {
+      "chengalpet": {
+       "1": {
+        "last": 199,
+        "n": 1
+       }
+      },
+      "coimbatore": {
+       "1": {
+        "last": 225,
+        "n": 4
+       }
+      },
+      "cuddalore_gmc": {
+       "1": {
+        "last": 216,
+        "n": 1
+       }
+      },
+      "dindigul": {
+       "1": {
+        "last": 235,
+        "n": 2
+       }
+      },
+      "erode": {
+       "1": {
+        "last": 215,
+        "n": 2
+       }
+      },
+      "kancheepuram": {
+       "1": {
+        "last": 150,
+        "n": 1
+       }
+      },
+      "kanyakumari": {
+       "1": {
+        "last": 145,
+        "n": 3
+       }
+      },
+      "kilpauk": {
+       "1": {
+        "last": 213,
+        "n": 5
+       }
+      },
+      "madurai": {
+       "1": {
+        "last": 60,
+        "n": 3
+       }
+      },
+      "mmc": {
+       "1": {
+        "last": 72,
+        "n": 5
+       }
+      },
+      "ramanathapuram": {
+       "1": {
+        "last": 230,
+        "n": 5
+       }
+      },
+      "salem": {
+       "1": {
+        "last": 196,
+        "n": 4
+       }
+      },
+      "stanley": {
+       "1": {
+        "last": 154,
+        "n": 4
+       }
+      },
+      "thanjavur": {
+       "1": {
+        "last": 214,
+        "n": 5
+       }
+      },
+      "theni": {
+       "1": {
+        "last": 176,
+        "n": 4
+       }
+      },
+      "thoothukudi": {
+       "1": {
+        "last": 128,
+        "n": 5
+       }
+      },
+      "tirunelveli": {
+       "1": {
+        "last": 54,
+        "n": 6
+       }
+      },
+      "trichy": {
+       "1": {
+        "last": 204,
+        "n": 6
+       }
+      },
+      "vellore": {
+       "1": {
+        "last": 186,
+        "n": 7
+       }
+      },
+      "virudhunagar": {
+       "1": {
+        "last": 148,
+        "n": 3
+       }
+      }
      }
     },
     "MBC&DNC": {
@@ -1734,12 +2506,6 @@
         "n": 4
        }
       },
-      "chidambaram": {
-       "2": {
-        "last": 565,
-        "n": 2
-       }
-      },
       "coimbatore": {
        "1": {
         "last": 701,
@@ -1754,7 +2520,7 @@
         "n": 2
        }
       },
-      "cuddalore": {
+      "cuddalore_dhq": {
        "1": {
         "last": 956,
         "n": 9
@@ -1772,6 +2538,10 @@
        "1": {
         "last": 735,
         "n": 9
+       },
+       "2": {
+        "last": 565,
+        "n": 2
        }
       },
       "dindigul": {
@@ -2048,6 +2818,158 @@
         "n": 1
        }
       }
+     },
+     "colleges2026": {
+      "chengalpet": {
+       "1": {
+        "last": 1986,
+        "n": 40
+       }
+      },
+      "coimbatore": {
+       "1": {
+        "last": 1312,
+        "n": 29
+       }
+      },
+      "cuddalore_dhq": {
+       "1": {
+        "last": 2347,
+        "n": 25
+       }
+      },
+      "cuddalore_gmc": {
+       "1": {
+        "last": 2151,
+        "n": 30
+       }
+      },
+      "dindigul": {
+       "1": {
+        "last": 1331,
+        "n": 18
+       }
+      },
+      "erode": {
+       "1": {
+        "last": 1795,
+        "n": 29
+       }
+      },
+      "kancheepuram": {
+       "1": {
+        "last": 2391,
+        "n": 33
+       }
+      },
+      "kanyakumari": {
+       "1": {
+        "last": 1669,
+        "n": 17
+       }
+      },
+      "kgh": {
+       "1": {
+        "last": 2184,
+        "n": 34
+       }
+      },
+      "kilpauk": {
+       "1": {
+        "last": 1670,
+        "n": 42
+       }
+      },
+      "madurai": {
+       "1": {
+        "last": 466,
+        "n": 32
+       }
+      },
+      "mmc": {
+       "1": {
+        "last": 587,
+        "n": 26
+       }
+      },
+      "nagapattinam": {
+       "1": {
+        "last": 2142,
+        "n": 44
+       }
+      },
+      "ooty": {
+       "1": {
+        "last": 2355,
+        "n": 30
+       }
+      },
+      "ramanathapuram": {
+       "1": {
+        "last": 1710,
+        "n": 41
+       }
+      },
+      "salem": {
+       "1": {
+        "last": 1415,
+        "n": 42
+       }
+      },
+      "stanley": {
+       "1": {
+        "last": 1123,
+        "n": 32
+       }
+      },
+      "thanjavur": {
+       "1": {
+        "last": 983,
+        "n": 40
+       }
+      },
+      "theni": {
+       "1": {
+        "last": 1381,
+        "n": 32
+       }
+      },
+      "thoothukudi": {
+       "1": {
+        "last": 1044,
+        "n": 34
+       }
+      },
+      "tirunelveli": {
+       "1": {
+        "last": 691,
+        "n": 32
+       }
+      },
+      "tirupur": {
+       "1": {
+        "last": 2037,
+        "n": 41
+       }
+      },
+      "trichy": {
+       "1": {
+        "last": 1175,
+        "n": 36
+       }
+      },
+      "vellore": {
+       "1": {
+        "last": 2147,
+        "n": 44
+       }
+      },
+      "virudhunagar": {
+       "1": {
+        "last": 918,
+        "n": 34
+       }
+      }
      }
     },
     "OC": {
@@ -2056,49 +2978,93 @@
      "colleges": {
       "chengalpet": {
        "2": {
-        "last": null,
+        "last": 2603,
         "n": 1
        }
       },
       "kanyakumari": {
        "1": {
-        "last": null,
+        "last": 188,
         "n": 1
        }
       },
       "kgh": {
        "1": {
-        "last": null,
+        "last": 1220,
         "n": 1
        }
       },
       "nagapattinam": {
        "2": {
-        "last": null,
+        "last": 3870,
         "n": 1
        }
       },
       "ooty": {
        "1": {
-        "last": null,
+        "last": 2603,
         "n": 1
        }
       },
       "stanley": {
        "2": {
-        "last": null,
+        "last": 1220,
         "n": 1
        }
       },
       "theni": {
        "1": {
-        "last": null,
+        "last": 1621,
         "n": 1
        }
       },
       "trichy": {
        "2": {
-        "last": null,
+        "last": 1621,
+        "n": 1
+       }
+      }
+     },
+     "colleges2026": {
+      "dindigul": {
+       "1": {
+        "last": 3811,
+        "n": 1
+       }
+      },
+      "kanyakumari": {
+       "1": {
+        "last": 702,
+        "n": 1
+       }
+      },
+      "salem": {
+       "1": {
+        "last": 6387,
+        "n": 1
+       }
+      },
+      "stanley": {
+       "1": {
+        "last": 6780,
+        "n": 2
+       }
+      },
+      "theni": {
+       "1": {
+        "last": 1299,
+        "n": 1
+       }
+      },
+      "thoothukudi": {
+       "1": {
+        "last": 1260,
+        "n": 1
+       }
+      },
+      "tirunelveli": {
+       "1": {
+        "last": 1383,
         "n": 1
        }
       }
@@ -2122,12 +3088,6 @@
         "n": 3
        }
       },
-      "chidambaram": {
-       "3": {
-        "last": 643,
-        "n": 2
-       }
-      },
       "coimbatore": {
        "1": {
         "last": 1124,
@@ -2142,7 +3102,7 @@
         "n": 2
        }
       },
-      "cuddalore": {
+      "cuddalore_dhq": {
        "1": {
         "last": 925,
         "n": 13
@@ -2160,6 +3120,10 @@
        "1": {
         "last": 410,
         "n": 3
+       },
+       "3": {
+        "last": 643,
+        "n": 2
        }
       },
       "dindigul": {
@@ -2428,6 +3392,158 @@
         "n": 2
        }
       }
+     },
+     "colleges2026": {
+      "chengalpet": {
+       "1": {
+        "last": 3567,
+        "n": 35
+       }
+      },
+      "coimbatore": {
+       "1": {
+        "last": 2435,
+        "n": 23
+       }
+      },
+      "cuddalore_dhq": {
+       "1": {
+        "last": 4190,
+        "n": 27
+       }
+      },
+      "cuddalore_gmc": {
+       "1": {
+        "last": 3805,
+        "n": 27
+       }
+      },
+      "dindigul": {
+       "1": {
+        "last": 2681,
+        "n": 18
+       }
+      },
+      "erode": {
+       "1": {
+        "last": 3622,
+        "n": 19
+       }
+      },
+      "kancheepuram": {
+       "1": {
+        "last": 4442,
+        "n": 25
+       }
+      },
+      "kanyakumari": {
+       "1": {
+        "last": 2319,
+        "n": 14
+       }
+      },
+      "kgh": {
+       "1": {
+        "last": 3670,
+        "n": 24
+       }
+      },
+      "kilpauk": {
+       "1": {
+        "last": 2553,
+        "n": 28
+       }
+      },
+      "madurai": {
+       "1": {
+        "last": 1358,
+        "n": 19
+       }
+      },
+      "mmc": {
+       "1": {
+        "last": 1063,
+        "n": 25
+       }
+      },
+      "nagapattinam": {
+       "1": {
+        "last": 4012,
+        "n": 32
+       }
+      },
+      "ooty": {
+       "1": {
+        "last": 4397,
+        "n": 25
+       }
+      },
+      "ramanathapuram": {
+       "1": {
+        "last": 3543,
+        "n": 30
+       }
+      },
+      "salem": {
+       "1": {
+        "last": 2834,
+        "n": 27
+       }
+      },
+      "stanley": {
+       "1": {
+        "last": 1892,
+        "n": 22
+       }
+      },
+      "thanjavur": {
+       "1": {
+        "last": 1431,
+        "n": 23
+       }
+      },
+      "theni": {
+       "1": {
+        "last": 2552,
+        "n": 27
+       }
+      },
+      "thoothukudi": {
+       "1": {
+        "last": 1706,
+        "n": 25
+       }
+      },
+      "tirunelveli": {
+       "1": {
+        "last": 1284,
+        "n": 22
+       }
+      },
+      "tirupur": {
+       "1": {
+        "last": 4359,
+        "n": 35
+       }
+      },
+      "trichy": {
+       "1": {
+        "last": 2078,
+        "n": 23
+       }
+      },
+      "vellore": {
+       "1": {
+        "last": 3763,
+        "n": 27
+       }
+      },
+      "virudhunagar": {
+       "1": {
+        "last": 2239,
+        "n": 22
+       }
+      }
      }
     },
     "SCA": {
@@ -2642,6 +3758,158 @@
         "n": 1
        }
       }
+     },
+     "colleges2026": {
+      "chengalpet": {
+       "1": {
+        "last": 610,
+        "n": 5
+       }
+      },
+      "coimbatore": {
+       "1": {
+        "last": 328,
+        "n": 4
+       }
+      },
+      "cuddalore_dhq": {
+       "1": {
+        "last": 782,
+        "n": 3
+       }
+      },
+      "cuddalore_gmc": {
+       "1": {
+        "last": 706,
+        "n": 3
+       }
+      },
+      "dindigul": {
+       "1": {
+        "last": 303,
+        "n": 2
+       }
+      },
+      "erode": {
+       "1": {
+        "last": 275,
+        "n": 2
+       }
+      },
+      "kancheepuram": {
+       "1": {
+        "last": 756,
+        "n": 3
+       }
+      },
+      "kanyakumari": {
+       "1": {
+        "last": 501,
+        "n": 3
+       }
+      },
+      "kgh": {
+       "1": {
+        "last": 747,
+        "n": 3
+       }
+      },
+      "kilpauk": {
+       "1": {
+        "last": 652,
+        "n": 7
+       }
+      },
+      "madurai": {
+       "1": {
+        "last": 214,
+        "n": 5
+       }
+      },
+      "mmc": {
+       "1": {
+        "last": 280,
+        "n": 4
+       }
+      },
+      "nagapattinam": {
+       "1": {
+        "last": 721,
+        "n": 6
+       }
+      },
+      "ooty": {
+       "1": {
+        "last": 627,
+        "n": 5
+       }
+      },
+      "ramanathapuram": {
+       "1": {
+        "last": 567,
+        "n": 5
+       }
+      },
+      "salem": {
+       "1": {
+        "last": 414,
+        "n": 4
+       }
+      },
+      "stanley": {
+       "1": {
+        "last": 581,
+        "n": 6
+       }
+      },
+      "thanjavur": {
+       "1": {
+        "last": 439,
+        "n": 3
+       }
+      },
+      "theni": {
+       "1": {
+        "last": 413,
+        "n": 7
+       }
+      },
+      "thoothukudi": {
+       "1": {
+        "last": 496,
+        "n": 4
+       }
+      },
+      "tirunelveli": {
+       "1": {
+        "last": 376,
+        "n": 3
+       }
+      },
+      "tirupur": {
+       "1": {
+        "last": 578,
+        "n": 6
+       }
+      },
+      "trichy": {
+       "1": {
+        "last": 311,
+        "n": 2
+       }
+      },
+      "vellore": {
+       "1": {
+        "last": 447,
+        "n": 6
+       }
+      },
+      "virudhunagar": {
+       "1": {
+        "last": 419,
+        "n": 4
+       }
+      }
      }
     },
     "ST": {
@@ -2654,7 +3922,7 @@
         "n": 2
        }
       },
-      "cuddalore": {
+      "cuddalore_dhq": {
        "1": {
         "last": 35,
         "n": 1
@@ -2770,6 +4038,146 @@
         "n": 1
        }
       }
+     },
+     "colleges2026": {
+      "chengalpet": {
+       "1": {
+        "last": 301,
+        "n": 1
+       }
+      },
+      "coimbatore": {
+       "1": {
+        "last": 173,
+        "n": 2
+       }
+      },
+      "cuddalore_dhq": {
+       "1": {
+        "last": 438,
+        "n": 1
+       }
+      },
+      "cuddalore_gmc": {
+       "1": {
+        "last": 443,
+        "n": 1
+       }
+      },
+      "dindigul": {
+       "1": {
+        "last": 200,
+        "n": 2
+       }
+      },
+      "erode": {
+       "1": {
+        "last": 246,
+        "n": 1
+       }
+      },
+      "kancheepuram": {
+       "1": {
+        "last": 104,
+        "n": 1
+       }
+      },
+      "kgh": {
+       "1": {
+        "last": 424,
+        "n": 1
+       }
+      },
+      "kilpauk": {
+       "1": {
+        "last": 298,
+        "n": 2
+       }
+      },
+      "madurai": {
+       "1": {
+        "last": 355,
+        "n": 3
+       }
+      },
+      "mmc": {
+       "1": {
+        "last": 126,
+        "n": 1
+       }
+      },
+      "nagapattinam": {
+       "1": {
+        "last": 183,
+        "n": 1
+       }
+      },
+      "ramanathapuram": {
+       "1": {
+        "last": 464,
+        "n": 1
+       }
+      },
+      "salem": {
+       "1": {
+        "last": 105,
+        "n": 4
+       }
+      },
+      "stanley": {
+       "1": {
+        "last": 169,
+        "n": 3
+       }
+      },
+      "thanjavur": {
+       "1": {
+        "last": 245,
+        "n": 1
+       }
+      },
+      "theni": {
+       "1": {
+        "last": 433,
+        "n": 2
+       }
+      },
+      "thoothukudi": {
+       "1": {
+        "last": 404,
+        "n": 1
+       }
+      },
+      "tirunelveli": {
+       "1": {
+        "last": 402,
+        "n": 1
+       }
+      },
+      "tirupur": {
+       "1": {
+        "last": 412,
+        "n": 2
+       }
+      },
+      "trichy": {
+       "1": {
+        "last": 187,
+        "n": 1
+       }
+      },
+      "vellore": {
+       "1": {
+        "last": 230,
+        "n": 2
+       }
+      },
+      "virudhunagar": {
+       "1": {
+        "last": 484,
+        "n": 2
+       }
+      }
      }
     }
    },
@@ -2792,7 +4200,7 @@
      "SCA": 2,
      "ST": 2
     },
-    "cuddalore": {
+    "cuddalore_dhq": {
      "BC": 8,
      "BCM": 1,
      "MBC&DNC": 6,
@@ -3019,13 +4427,22 @@
      "SCA": 3,
      "ST": 2
     },
-    "cuddalore": {
-     "BC": 34,
-     "BCM": 4,
-     "MBC&DNC": 26,
-     "OC": 39,
-     "SC": 24,
-     "SCA": 3,
+    "cuddalore_dhq": {
+     "BC": 17,
+     "BCM": 2,
+     "MBC&DNC": 12,
+     "OC": 19,
+     "SC": 14,
+     "SCA": 2,
+     "ST": 0
+    },
+    "cuddalore_gmc": {
+     "BC": 17,
+     "BCM": 2,
+     "MBC&DNC": 14,
+     "OC": 20,
+     "SC": 10,
+     "SCA": 1,
      "ST": 1
     },
     "dindigul": {
@@ -3223,6 +4640,7 @@
    "communities": {
     "BC": {
      "applicants2025": 73,
+     "applicants2026": 104,
      "colleges": {
       "chengalpet": {
        "1": {
@@ -3324,10 +4742,109 @@
         "n": 2
        }
       }
+     },
+     "colleges2026": {
+      "chengalpet": {
+       "1": {
+        "last": 98,
+        "n": 3
+       }
+      },
+      "coimbatore": {
+       "1": {
+        "last": 90,
+        "n": 4
+       }
+      },
+      "dindigul": {
+       "1": {
+        "last": 39,
+        "n": 2
+       }
+      },
+      "kanyakumari": {
+       "1": {
+        "last": 68,
+        "n": 4
+       }
+      },
+      "kilpauk": {
+       "1": {
+        "last": 61,
+        "n": 2
+       }
+      },
+      "madurai": {
+       "1": {
+        "last": 82,
+        "n": 10
+       }
+      },
+      "mmc": {
+       "1": {
+        "last": 102,
+        "n": 11
+       }
+      },
+      "ramanathapuram": {
+       "1": {
+        "last": 57,
+        "n": 1
+       }
+      },
+      "salem": {
+       "1": {
+        "last": 54,
+        "n": 3
+       }
+      },
+      "thanjavur": {
+       "1": {
+        "last": 100,
+        "n": 6
+       }
+      },
+      "theni": {
+       "1": {
+        "last": 97,
+        "n": 4
+       }
+      },
+      "thoothukudi": {
+       "1": {
+        "last": 92,
+        "n": 6
+       }
+      },
+      "tirunelveli": {
+       "1": {
+        "last": 56,
+        "n": 14
+       }
+      },
+      "trichy": {
+       "1": {
+        "last": 88,
+        "n": 7
+       }
+      },
+      "vellore": {
+       "1": {
+        "last": 71,
+        "n": 1
+       }
+      },
+      "virudhunagar": {
+       "1": {
+        "last": 78,
+        "n": 2
+       }
+      }
      }
     },
     "BCM": {
      "applicants2025": 1,
+     "applicants2026": 10,
      "colleges": {
       "chengalpet": {
        "1": {
@@ -3335,10 +4852,43 @@
         "n": 1
        }
       }
+     },
+     "colleges2026": {
+      "madurai": {
+       "1": {
+        "last": 10,
+        "n": 2
+       }
+      },
+      "mmc": {
+       "1": {
+        "last": 5,
+        "n": 1
+       }
+      },
+      "ramanathapuram": {
+       "1": {
+        "last": 1,
+        "n": 1
+       }
+      },
+      "theni": {
+       "1": {
+        "last": 4,
+        "n": 1
+       }
+      },
+      "tirunelveli": {
+       "1": {
+        "last": 7,
+        "n": 1
+       }
+      }
      }
     },
     "MBC&DNC": {
      "applicants2025": 129,
+     "applicants2026": 169,
      "colleges": {
       "chengalpet": {
        "1": {
@@ -3352,7 +4902,7 @@
         "n": 7
        }
       },
-      "cuddalore": {
+      "cuddalore_dhq": {
        "1": {
         "last": 126,
         "n": 2
@@ -3480,32 +5030,157 @@
         "n": 11
        }
       }
+     },
+     "colleges2026": {
+      "chengalpet": {
+       "1": {
+        "last": 152,
+        "n": 4
+       }
+      },
+      "coimbatore": {
+       "1": {
+        "last": 140,
+        "n": 15
+       }
+      },
+      "cuddalore_dhq": {
+       "1": {
+        "last": 163,
+        "n": 3
+       }
+      },
+      "cuddalore_gmc": {
+       "1": {
+        "last": 149,
+        "n": 1
+       }
+      },
+      "dindigul": {
+       "1": {
+        "last": 142,
+        "n": 7
+       }
+      },
+      "kanyakumari": {
+       "1": {
+        "last": 134,
+        "n": 3
+       }
+      },
+      "kilpauk": {
+       "1": {
+        "last": 104,
+        "n": 2
+       }
+      },
+      "madurai": {
+       "1": {
+        "last": 99,
+        "n": 10
+       }
+      },
+      "mmc": {
+       "1": {
+        "last": 121,
+        "n": 14
+       }
+      },
+      "ramanathapuram": {
+       "1": {
+        "last": 112,
+        "n": 1
+       }
+      },
+      "salem": {
+       "1": {
+        "last": 146,
+        "n": 2
+       }
+      },
+      "stanley": {
+       "1": {
+        "last": 154,
+        "n": 5
+       }
+      },
+      "thanjavur": {
+       "1": {
+        "last": 155,
+        "n": 4
+       }
+      },
+      "theni": {
+       "1": {
+        "last": 159,
+        "n": 9
+       }
+      },
+      "thoothukudi": {
+       "1": {
+        "last": 164,
+        "n": 7
+       }
+      },
+      "tirunelveli": {
+       "1": {
+        "last": 78,
+        "n": 8
+       }
+      },
+      "tirupur": {
+       "1": {
+        "last": 165,
+        "n": 1
+       }
+      },
+      "trichy": {
+       "1": {
+        "last": 130,
+        "n": 11
+       }
+      },
+      "virudhunagar": {
+       "1": {
+        "last": 148,
+        "n": 13
+       }
+      }
      }
     },
     "OC": {
      "applicants2025": 10,
+     "applicants2026": 4,
      "colleges": {
       "dindigul": {
        "1": {
-        "last": null,
+        "last": 127,
         "n": 1
        }
       },
       "kilpauk": {
        "1": {
-        "last": null,
+        "last": 150,
         "n": 1
        }
       },
       "theni": {
        "2": {
-        "last": null,
+        "last": 104,
         "n": 1
        }
       },
       "tirunelveli": {
        "1": {
-        "last": null,
+        "last": 64,
+        "n": 1
+       }
+      }
+     },
+     "colleges2026": {
+      "mmc": {
+       "1": {
+        "last": 81,
         "n": 1
        }
       }
@@ -3513,6 +5188,7 @@
     },
     "SC": {
      "applicants2025": 157,
+     "applicants2026": 191,
      "colleges": {
       "chengalpet": {
        "1": {
@@ -3526,7 +5202,7 @@
         "n": 9
        }
       },
-      "cuddalore": {
+      "cuddalore_dhq": {
        "1": {
         "last": 145,
         "n": 5
@@ -3688,10 +5364,151 @@
         "n": 1
        }
       }
+     },
+     "colleges2026": {
+      "chengalpet": {
+       "1": {
+        "last": 172,
+        "n": 2
+       }
+      },
+      "coimbatore": {
+       "1": {
+        "last": 48,
+        "n": 10
+       }
+      },
+      "cuddalore_dhq": {
+       "1": {
+        "last": 112,
+        "n": 1
+       }
+      },
+      "cuddalore_gmc": {
+       "1": {
+        "last": 139,
+        "n": 5
+       }
+      },
+      "dindigul": {
+       "1": {
+        "last": 110,
+        "n": 6
+       }
+      },
+      "erode": {
+       "1": {
+        "last": 169,
+        "n": 2
+       }
+      },
+      "kancheepuram": {
+       "1": {
+        "last": 155,
+        "n": 1
+       }
+      },
+      "kanyakumari": {
+       "1": {
+        "last": 161,
+        "n": 7
+       }
+      },
+      "kilpauk": {
+       "1": {
+        "last": 178,
+        "n": 5
+       }
+      },
+      "madurai": {
+       "1": {
+        "last": 75,
+        "n": 13
+       }
+      },
+      "mmc": {
+       "1": {
+        "last": 84,
+        "n": 8
+       }
+      },
+      "nagapattinam": {
+       "1": {
+        "last": 187,
+        "n": 2
+       }
+      },
+      "ramanathapuram": {
+       "1": {
+        "last": 151,
+        "n": 2
+       }
+      },
+      "salem": {
+       "1": {
+        "last": 147,
+        "n": 3
+       }
+      },
+      "stanley": {
+       "1": {
+        "last": 180,
+        "n": 13
+       }
+      },
+      "thanjavur": {
+       "1": {
+        "last": 168,
+        "n": 14
+       }
+      },
+      "theni": {
+       "1": {
+        "last": 81,
+        "n": 4
+       }
+      },
+      "thoothukudi": {
+       "1": {
+        "last": 140,
+        "n": 10
+       }
+      },
+      "tirunelveli": {
+       "1": {
+        "last": 62,
+        "n": 14
+       }
+      },
+      "tirupur": {
+       "1": {
+        "last": 125,
+        "n": 1
+       }
+      },
+      "trichy": {
+       "1": {
+        "last": 101,
+        "n": 10
+       }
+      },
+      "vellore": {
+       "1": {
+        "last": 188,
+        "n": 3
+       }
+      },
+      "virudhunagar": {
+       "1": {
+        "last": 181,
+        "n": 6
+       }
+      }
      }
     },
     "SCA": {
      "applicants2025": 18,
+     "applicants2026": 20,
      "colleges": {
       "coimbatore": {
        "1": {
@@ -3757,10 +5574,91 @@
         "n": 1
        }
       }
+     },
+     "colleges2026": {
+      "coimbatore": {
+       "1": {
+        "last": 6,
+        "n": 1
+       }
+      },
+      "dindigul": {
+       "1": {
+        "last": 13,
+        "n": 1
+       }
+      },
+      "erode": {
+       "1": {
+        "last": 14,
+        "n": 1
+       }
+      },
+      "madurai": {
+       "1": {
+        "last": 1,
+        "n": 1
+       }
+      },
+      "mmc": {
+       "1": {
+        "last": 17,
+        "n": 1
+       }
+      },
+      "ooty": {
+       "1": {
+        "last": 12,
+        "n": 1
+       }
+      },
+      "stanley": {
+       "1": {
+        "last": 18,
+        "n": 1
+       }
+      },
+      "thanjavur": {
+       "1": {
+        "last": 15,
+        "n": 1
+       }
+      },
+      "theni": {
+       "1": {
+        "last": 19,
+        "n": 4
+       }
+      },
+      "thoothukudi": {
+       "1": {
+        "last": 20,
+        "n": 3
+       }
+      },
+      "tirunelveli": {
+       "1": {
+        "last": 9,
+        "n": 1
+       }
+      },
+      "trichy": {
+       "1": {
+        "last": 11,
+        "n": 1
+       }
+      },
+      "virudhunagar": {
+       "1": {
+        "last": 7,
+        "n": 1
+       }
+      }
      }
     },
     "ST": {
      "applicants2025": 2,
+     "applicants2026": 3,
      "colleges": {
       "theni": {
        "1": {
@@ -3768,7 +5666,8 @@
         "n": 1
        }
       }
-     }
+     },
+     "colleges2026": {}
     }
    },
    "seats2025": {
@@ -3790,7 +5689,7 @@
      "SCA": 1,
      "ST": 0
     },
-    "cuddalore": {
+    "cuddalore_dhq": {
      "BC": 3,
      "BCM": 0,
      "MBC&DNC": 2,
@@ -4017,13 +5916,22 @@
      "SCA": 1,
      "ST": 0
     },
-    "cuddalore": {
-     "BC": 12,
-     "BCM": 2,
-     "MBC&DNC": 10,
-     "OC": 15,
-     "SC": 8,
-     "SCA": 2,
+    "cuddalore_dhq": {
+     "BC": 6,
+     "BCM": 1,
+     "MBC&DNC": 5,
+     "OC": 7,
+     "SC": 4,
+     "SCA": 1,
+     "ST": 0
+    },
+    "cuddalore_gmc": {
+     "BC": 6,
+     "BCM": 1,
+     "MBC&DNC": 5,
+     "OC": 8,
+     "SC": 4,
+     "SCA": 1,
      "ST": 0
     },
     "dindigul": {
