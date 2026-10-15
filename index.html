@@ -125,7 +125,7 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
 <ul>
 <li><b>Yes</b> = good chance. <b>Maybe</b> = small chance. <b>No</b> = not likely.</li>
 <li>We use past counselling data (2025): the last rank that got a seat, for your community, in each college and round.</li>
-<li>2026 has more government seats. So we increase the 2025 last rank a little, to guess the 2026 last rank.</li>
+<li>2026 has more government seats, and 2026 Round 1 last ranks came out higher than 2025. So we increase the 2025 last rank to guess the 2026 last rank.</li>
 <li>OC has no community rank, so for OC we use the overall rank in your group's rank list.</li>
 <li>The <b>2026 last rank</b> column shows the real 2026 result so far (Round 1).</li>
 <li>Sports, Ex-servicemen, PwD and IRT ward seats and self-financing colleges are not included.</li>
@@ -206,7 +206,7 @@ table.pred .tag{padding:.15em .5em;font-size:.85em}
 <ul>
 <li><b>Yes</b> = good chance. <b>Maybe</b> = small chance. <b>No</b> = not likely.</li>
 <li>We use 2025 counselling data: the last rank that got a seat, for your community, in each course, college and round.</li>
-<li>If a college has more (or fewer) seats in 2026, we raise (or lower) the 2025 last rank a little.</li>
+<li>If a college has more (or fewer) seats in 2026, we raise (or lower) the 2025 last rank a little. 2026 last ranks so far came out about 25% higher than 2025, so we raise them by that too.</li>
 <li>Some courses have new names in 2026 (for example B.Sc. Radiography is now B.MRIT). We match them to the 2025 course.</li>
 <li>The <b>2026 last rank</b> column shows the real 2026 result so far (up to Round 2).</li>
 <li>Only government and ESIC college seats. PwD and Ex-servicemen seats and self-financing colleges are not included.</li>
@@ -263,7 +263,11 @@ fetch('data/dgnm.json').then(r => r.json()).then(d => { DATA = d; document.getEl
 
 function sum(o){ return o ? Object.values(o).reduce((a,b)=>a+b,0) : 0; }
 
+// Demand factor: 2026 cutoffs ran higher than 2025 x seat ratio. Fitted on
+// 2026 Round 1 with mCounselling/scripts/2026/backtest_mpredictor.py.
+const K_DGNM = {Science: 1.55, Vocational: 1.10, Others: 1.45};
 function predict(group, comm, rank){
+  const K = K_DGNM[group] || 1;
   const g = DATA.groups[group], c = g.communities[comm];
   const tot25 = Object.values(g.seats2025).reduce((a,o)=>a+sum(o),0);
   const tot26 = Object.values(g.seats2026).reduce((a,o)=>a+sum(o),0);
@@ -282,7 +286,7 @@ function predict(group, comm, rank){
     const r = [1,2,3].map(n => {
       if (hist[n]) { cum = Math.max(cum, hist[n].last); last = cum; }
       if (!cum) return 'No';
-      const proj = cum * ratio;
+      const proj = cum * ratio * K;
       const s = rank <= proj * 0.9 ? 'Yes' : rank <= proj * 1.1 ? 'Maybe' : 'No';
       return s;
     });
@@ -291,11 +295,11 @@ function predict(group, comm, rank){
     if (last26) cut26 = Math.max(cut26 || 0, last26);
     const yes = r.indexOf('Yes'), maybe = r.indexOf('Maybe');
     best = yes >= 0 ? {round: yes+1, s:'Yes'} : maybe >= 0 ? {round: maybe+1, s:'Maybe'} : null;
-    rows.push({k, r, last, last26, best, proj: last ? Math.round(last * ratio) : null, hasData: !!last});
+    rows.push({k, r, last, last26, best, proj: last ? Math.round(last * ratio * K) : null, hasData: !!last});
   }
   const key = x => x.best ? (x.best.s === 'Yes' ? 0 : 3) + x.best.round : 9;
   rows.sort((a,b) => key(a)-key(b) || (b.proj||0)-(a.proj||0));
-  return {rows, cut25, cut26, proj26: cut25 ? Math.round(cut25 * gRatio) : null};
+  return {rows, cut25, cut26, proj26: cut25 ? Math.round(cut25 * gRatio * K) : null};
 }
 
 function esc(s){ return String(s).replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch])); }
@@ -483,7 +487,10 @@ document.getElementById('p-comm').addEventListener('change', pForm);
 pForm();
 
 // One course: a row per college. Same method as the other tabs.
+// Demand factor (see K_DGNM): fitted on 2026 Rounds 1-2. MBBS needs none (fit = 1.00).
+const K_PARAMED = 1.25;
 function pPredict(course, comm, rank){
+  const K = K_PARAMED;
   const c = PDATA.courses[course], hist = c.communities[comm];
   const t25 = sum(c.seats2025), t26 = sum(c.seats2026);
   const gRatio = t25 && t26 ? t26 / t25 : 1;
@@ -499,7 +506,7 @@ function pPredict(course, comm, rank){
     const r = [1,2,3].map(n => {
       if (h25[n]) { cum = Math.max(cum, h25[n].last); last = cum; }
       if (!cum) return 'No';
-      const proj = cum * ratio;
+      const proj = cum * ratio * K;
       return rank <= proj * 0.9 ? 'Yes' : rank <= proj * 1.1 ? 'Maybe' : 'No';
     });
     const last26 = Math.max(0, ...Object.values(h26).map(x => x.last)) || null;
@@ -507,7 +514,7 @@ function pPredict(course, comm, rank){
     if (last26) cut26 = Math.max(cut26 || 0, last26);
     const yes = r.indexOf('Yes'), maybe = r.indexOf('Maybe');
     const best = yes >= 0 ? {round: yes+1, s:'Yes'} : maybe >= 0 ? {round: maybe+1, s:'Maybe'} : null;
-    rows.push({k, r, last, last26, best, proj: last ? Math.round(last * ratio) : null, hasData: !!last});
+    rows.push({k, r, last, last26, best, proj: last ? Math.round(last * ratio * K) : null, hasData: !!last});
   }
   const key = x => x.best ? (x.best.s === 'Yes' ? 0 : 3) + x.best.round : 9;
   rows.sort((a,b) => key(a)-key(b) || (a.proj||1e9)-(b.proj||1e9) || (a.last26||1e9)-(b.last26||1e9));
